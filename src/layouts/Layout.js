@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+// import Footer from "../components/footer/Footer";
 
 const LayoutContainer = styled.div`
   display: flex;
