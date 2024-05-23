@@ -16,7 +16,7 @@ const AdminPage = () => {
       <Wrap>
         <InnerWrap>
           <SideCate>
-            <Link to={'admin/order/management'} style={LinkStyle}>
+            <Link to={'/admin/order/management'} style={LinkStyle}>
             <li><span>주문 관리</span></li>
             </Link>
             <Link to={'/admin/order/search'} style={LinkStyle}>
