@@ -29,7 +29,7 @@ const adminRouter = () => {
   return [
     { path: "", element: <Navigate to="order/management" /> },
     {
-      path: "menu/soldout",
+      path: "menu_soldout",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyMenuSoldOutPage />
@@ -45,7 +45,7 @@ const adminRouter = () => {
     //   ),
     // },
     {
-      path: "order/management",
+      path: "order_management",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyOrderManagementPage />
@@ -53,7 +53,7 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "order/search",
+      path: "order_search",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyOrderSearchPage />
@@ -77,7 +77,7 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "store/management",
+      path: "store_management",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyStoreManagementPage />
