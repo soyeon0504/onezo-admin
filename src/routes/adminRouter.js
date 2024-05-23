@@ -17,7 +17,7 @@ const LazyOrderSearchPage = lazy(() =>
   import("../pages/order/OrderSearchPage"),
 );
 // 리뷰관리
-const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage"));
+const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
 // 매출관리
 const LazySalesPage = lazy(() => import("../pages/sales/SalesPage"));
 // 매장관리
