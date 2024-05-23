@@ -6,7 +6,7 @@ import adminRouter from "./adminRouter";
 
 const LazyLoginPage = lazy(() => import("../pages/login/LoginPage.tsx"));
 // const LazyJoinPage = lazy(() => import("../pages/join/JoinPage"));
-const LazyMainPage = lazy(() => import("../pages/main/MainPage"));
+const LazyMainPage = lazy(() => import("../pages/main/MainPage.tsx"));
 const LazyAdminPage = lazy(() => import("../pages/admin/AdminPage.tsx"));
 
 

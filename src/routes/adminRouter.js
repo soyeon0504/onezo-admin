@@ -2,12 +2,6 @@ import { Suspense, lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Loading from "../components/loading/Loading";
 
-// 메뉴 품절
-const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage"));
-// 메뉴 등록
-// const LazyMenuRegisterPage = lazy(() =>
-//   import("../pages/menu/MenuRegisterPage"),
-// );
 // 주문 관리
 const LazyOrderManagementPage = lazy(() =>
   import("../pages/order/OrderManagementPage"),
@@ -16,34 +10,28 @@ const LazyOrderManagementPage = lazy(() =>
 const LazyOrderSearchPage = lazy(() =>
   import("../pages/order/OrderSearchPage"),
 );
+// 일정 관리
+const LazySchedulePage = lazy(() =>
+  import("../pages/schedule/SchedulePage.tsx"),
+);
+// 메뉴 품절
+const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage"));
 // 리뷰관리
 const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
-// 매출관리
+// 매출 관리
 const LazySalesPage = lazy(() => import("../pages/sales/SalesPage"));
-// 매장관리
-const LazyStoreManagementPage = lazy(() =>
-  import("../pages/store/StoreManagementPage"),
+// 공지 등록
+const LazyNoticePage = lazy(() =>
+  import("../pages/notice/NoticePage.js"),
 );
+// 메뉴 등록
+// const LazyMenuRegisterPage = lazy(() =>
+//   import("../pages/menu/MenuRegisterPage"),
+// );
 
 const adminRouter = () => {
   return [
-    { path: "", element: <Navigate to="order/management" /> },
-    {
-      path: "menu_soldout",
-      element: (
-        <Suspense fallback={<Loading />}>
-          <LazyMenuSoldOutPage />
-        </Suspense>
-      ),
-    },
-    // {
-    //   path: "/menu/register",
-    //   element: (
-    //     <Suspense fallback={<Loading />}>
-    //       <LazyMenuRegisterPage />
-    //     </Suspense>
-    //   ),
-    // },
+    { path: "", element: <Navigate to="order_management" /> },
     {
       path: "order_management",
       element: (
@@ -57,6 +45,22 @@ const adminRouter = () => {
       element: (
         <Suspense fallback={<Loading />}>
           <LazyOrderSearchPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "schedule",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <LazySchedulePage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "soldout",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <LazyMenuSoldOutPage />
         </Suspense>
       ),
     },
@@ -77,13 +81,21 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "store_management",
+      path: "notice",
       element: (
         <Suspense fallback={<Loading />}>
-          <LazyStoreManagementPage />
+          <LazyNoticePage />
         </Suspense>
       ),
     },
+    // {
+    //   path: "/menu/register",
+    //   element: (
+    //     <Suspense fallback={<Loading />}>
+    //       <LazyMenuRegisterPage />
+    //     </Suspense>
+    //   ),
+    // },
   ];
 };
 

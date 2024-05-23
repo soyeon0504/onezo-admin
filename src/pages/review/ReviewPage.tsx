@@ -10,7 +10,8 @@ import { PaginationOrange } from "../../styles/Pagination.tsx";
 const reviewData = [
   {
     id: 1,
-    title: "경대북문점 직원들 모두 너무 친절해요^_^ 치킨 냠냠 많이 먹으면 살이 쪄요ㅠㅠ 그치만 맛있어서 멈출수가 없지요",
+    title:
+      "경대북문점 직원들 모두 너무 친절해요^_^ 치킨 냠냠 많이 먹으면 살이 쪄요ㅠㅠ 그치만 맛있어서 멈출수가 없지요",
     nick: "콩이",
     date: "2024.02.20",
   },
@@ -112,24 +113,26 @@ const ReviewPage = () => {
           ></input>
           <button type="button" onClick={() => setSearch(inputValue)}></button>
         </SearchForm>
-        {reviewData.slice((page * COMMENTS_PER_PAGE) - 10 , page * COMMENTS_PER_PAGE).map(item => (
-          <ReviewItem key={item.id}>
-            <div style={{ width: "730px", display: "flex",paddingRight:"20px" }}>
-              <p>{item.id}.</p>
-              <p>{item.title}</p>
-            </div>
-            <span>{item.nick}</span>
-            <button>댓글쓰기</button>
-          </ReviewItem>
-        ))}
+        {reviewData
+          .slice(page * COMMENTS_PER_PAGE - 10, page * COMMENTS_PER_PAGE)
+          .map(item => (
+            <ReviewItem key={item.id}>
+              <div>
+                <p>{item.id}.</p>
+                <p>{item.title}</p>
+              </div>
+              <span>{item.nick}</span>
+              <button>댓글쓰기</button>
+            </ReviewItem>
+          ))}
         <div style={{ textAlign: "center", margin: "20px 0" }}>
-            <PaginationOrange
-              current={page}
-              onChange={handlePageChange}
-              total={reviewData.length}
-              pageSize={10}
-            />
-          </div>
+          <PaginationOrange
+            current={page}
+            onChange={handlePageChange}
+            total={reviewData.length}
+            pageSize={10}
+          />
+        </div>
       </ReviewStyle>
     </>
   );

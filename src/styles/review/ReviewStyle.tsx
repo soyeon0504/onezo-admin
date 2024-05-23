@@ -47,9 +47,16 @@ export const ReviewItem = styled.div`
   width: 990px;
   border: 1px solid #d9d9d9;
   margin: 0 auto;
+  div {
+    width: 730px;
+    display: flex;
+    padding-right: 30px;
+  }
   p {
     font-size: 20px;
     font-weight: 600;
+    padding: 10px 0;
+    line-height: 30px;
   }
   p:nth-of-type(1) {
     margin-right: 20px;

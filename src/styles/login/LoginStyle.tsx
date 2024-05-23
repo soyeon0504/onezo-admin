@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const LoginPageStyle = styled.div`
-  height: 1300px;
+  width: 1300px;
   margin: 0 auto;
 `;
 

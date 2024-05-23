@@ -13,7 +13,7 @@ const AdminPage = () => {
   const adminCate = [
     {
       title: "가맹점페이지",
-      name: ["order_management", "order_search", "", "menu_soldout", "review", "sales", "store_management"],
+      name: ["order_management", "order_search", "schedule", "soldout", "review", "sales", "notice"],
       list: [
         "주문 관리",
         "주문 조회",
@@ -52,11 +52,11 @@ const handleSubItemClick = subItem => {
       return (
         (name === "order_management" && subItem === "주문 관리") ||
         (name === "order_search" && subItem === "주문 조회") ||
-        (name === "" && subItem === "일정 관리") ||
-        (name === "menu_soldout" && subItem === "메뉴 품절") ||
+        (name === "schedule" && subItem === "일정 관리") ||
+        (name === "soldout" && subItem === "메뉴 품절") ||
         (name === "review" && subItem === "리뷰 관리") ||
         (name === "sales" && subItem === "매출 관리") ||
-        (name === "store_management" && subItem === "공지 등록")
+        (name === "notice" && subItem === "공지 등록")
       );
     });
 
