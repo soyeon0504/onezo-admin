@@ -7,7 +7,7 @@ export const Wrap = styled.div`
 export const InnerWrap = styled.div`
 max-width: 1300px;
 margin: 0 auto;
-background-color: aquamarine;
+/* background-color: aquamarine; */
 `
 
 export const SideCate = styled.ul`
@@ -16,7 +16,7 @@ font-size: 24px;
 height: 590px;
 display: block;
 li {
-    padding-top: 60px;
+    padding-bottom: 60px;
 }
 span:hover {
     font-weight: 700;

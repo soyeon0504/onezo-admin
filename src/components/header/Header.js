@@ -8,6 +8,7 @@ const Wrap = styled.div`
   box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.1);
   z-index: 999;
   background-color: #fff;
+  top: 0;
 `;
 const InnerWrap = styled.div`
   display: flex;

@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router'
 import { InnerWrap, SideCate, Wrap } from '../../styles/admin/AdminStyle'
 import { Link } from 'react-router-dom'
+import Layout from '../../layouts/Layout'
 // import Layout from '../../layouts/Layout'
 
 const LinkStyle = {
@@ -12,7 +13,7 @@ const LinkStyle = {
 const AdminPage = () => {
   return (
     <div>
-      {/* <Layout /> */}
+      <Layout>
       <Wrap>
         <InnerWrap>
           <SideCate>
@@ -31,6 +32,7 @@ const AdminPage = () => {
         </InnerWrap>
       <Outlet />
       </Wrap>
+      </Layout>
     </div>
   )
 }

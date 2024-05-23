@@ -14,6 +14,8 @@ import {
   Wrap,
 } from "../../styles/order/OrderManagementStyle";
 import OrderAbout from '../../components/order/OrderAbout'
+import Layout from "../../layouts/Layout";
+// import Layout from "../../layouts/Layout";
 
 const orderData = [
   {
