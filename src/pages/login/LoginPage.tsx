@@ -8,10 +8,11 @@ import {
   LogoZone,
   InputBox,
 } from "../../styles/login/LoginStyle.tsx";
+import Layout from "../../layouts/Layout.js";
 
 const LoginPage = () => {
   return (
-    <>
+    <Layout>
       <LoginPageStyle>
         <LoginBox>
           <LogoZone>
@@ -43,7 +44,7 @@ const LoginPage = () => {
           </LoginFooter>
         </LoginBox>
       </LoginPageStyle>
-    </>
+    </Layout>
   );
 };
 
