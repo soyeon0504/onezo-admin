@@ -12,7 +12,7 @@ import {
   RejectBt,
   TimeWrap,
   Wrap,
-} from "../../styles/order/OrderManagementStyle";
+} from "../../styles/order/WaitComponentStyle";
 import OrderAbout from '../../components/order/OrderAbout'
 
 const orderData = [
@@ -78,14 +78,47 @@ const orderData = [
   },
 ]
 
-const OrderManagementPage = () => {
+const WaitComponent = () => {
   return (
     <>
       <Wrap>
         <OrderAbout />
+        <InnerWrap>
+          <OrderBoxWrap>
+            {orderData && orderData.map((item, index) => (
+              <OrderBox key={index}>
+              <OrderBoxInner>
+                <TimeWrap>
+                  <div className="order-time">{item.time}</div>
+                </TimeWrap>
+                <PriceMenuWrap>
+                  <PriceWrap>
+                    <div className="order-count">[메뉴 {item.totalCount}개]</div>
+                    <div className="order-price">{item.price}원</div>
+                    <div className="order-type">({item.type})</div>
+                  </PriceWrap>
+                  <MenuWrap>
+                    <div className="order-menu-1">{item.menu} {item.menuCount}개</div>
+                    <div className="order-menu-2">{item.side} {item.sideCount}개</div>
+                  </MenuWrap>
+                </PriceMenuWrap>
+                <ButtonWrap>
+                  <AcceptBt>
+                    <button>접수하기</button>
+                  </AcceptBt>
+                  <RejectBt>
+                    <button>주문거부</button>
+                  </RejectBt>
+                </ButtonWrap>
+              </OrderBoxInner>
+            </OrderBox>
+            ))}
+            
+          </OrderBoxWrap>
+        </InnerWrap>
       </Wrap>
     </>
   );
 };
 
-export default OrderManagementPage;
+export default WaitComponent;

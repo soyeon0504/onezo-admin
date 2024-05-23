@@ -98,7 +98,6 @@ export const RejectBt = styled.button`
   background-color: #fff;
   width: 220px;
   height: 60px;
-
   cursor: pointer;
   button {
     font-weight: 700;
@@ -109,3 +108,18 @@ export const RejectBt = styled.button`
     cursor: pointer;
   }
 `;
+
+export const CompleteButton = styled.button`
+width: 220px;
+height: 80px;
+color: #fff;
+border: none;
+background-color: #FF8B38;
+`
+export const CancleButton = styled.button`
+border: none;
+color: #fff;
+width: 100px;
+height: 50px;
+background-color: #ff0000;
+`
