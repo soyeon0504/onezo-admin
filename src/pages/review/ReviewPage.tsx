@@ -4,6 +4,7 @@ import {
   ReviewStyle,
   SearchForm,
 } from "../../styles/review/ReviewStyle.tsx";
+import { PaginationOrange } from "../../styles/Pagination.tsx";
 
 // 더미데이터
 const reviewData = [
@@ -85,6 +86,13 @@ const ReviewPage = () => {
   const [search, setSearch] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
 
+  const [page, setPage] = useState<number>(1);
+  // 페이지네이션
+  const COMMENTS_PER_PAGE = 10;
+  const handlePageChange = _tempPage => {
+    setPage(_tempPage);
+  };
+
   return (
     <>
       <ReviewStyle>
@@ -104,7 +112,7 @@ const ReviewPage = () => {
           ></input>
           <button type="button" onClick={() => setSearch(inputValue)}></button>
         </SearchForm>
-        {reviewData.map(item => (
+        {reviewData.slice((page * COMMENTS_PER_PAGE) - 10 , page * COMMENTS_PER_PAGE).map(item => (
           <ReviewItem key={item.id}>
             <div style={{ width: "730px", display: "flex",paddingRight:"20px" }}>
               <p>{item.id}.</p>
@@ -114,6 +122,14 @@ const ReviewPage = () => {
             <button>댓글쓰기</button>
           </ReviewItem>
         ))}
+        <div style={{ textAlign: "center", margin: "20px 0" }}>
+            <PaginationOrange
+              current={page}
+              onChange={handlePageChange}
+              total={reviewData.length}
+              pageSize={10}
+            />
+          </div>
       </ReviewStyle>
     </>
   );
