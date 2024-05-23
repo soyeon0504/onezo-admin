@@ -2,7 +2,15 @@ import React from 'react'
 
 const OrderSearchPage = () => {
   return (
-    <div>OrderSearchPage</div>
+    <>
+    {/* <Wrap>
+      <InnerWrap>
+        <Top>
+
+        </Top>
+      </InnerWrap>
+    </Wrap> */}
+    </>
   )
 }
 
