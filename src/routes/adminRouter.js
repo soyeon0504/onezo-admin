@@ -15,7 +15,7 @@ const LazySchedulePage = lazy(() =>
   import("../pages/schedule/SchedulePage.tsx"),
 );
 // 메뉴 품절
-const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage"));
+const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage.tsx"));
 // 리뷰관리
 const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
 // 매출 관리

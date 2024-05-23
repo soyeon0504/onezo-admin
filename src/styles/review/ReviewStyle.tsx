@@ -13,7 +13,7 @@ export const ReviewStyle = styled.div`
 `;
 
 export const SearchForm = styled.div`
-  margin-left: 780px;
+  margin-left: 800px;
   display: flex;
   justify-content: space-between;
   align-items: center;
