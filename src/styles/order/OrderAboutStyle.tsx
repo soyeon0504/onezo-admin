@@ -1,18 +1,17 @@
 import styled from "@emotion/styled";
 
 export const Wrap = styled.div`
-  width: 100vw;
+  width: 1080px;
 `;
 
 export const InnerWrap = styled.div`
   max-width: 1300px;
   margin: 0 auto;
-  background-color: aquamarine;
 `;
 export const OrderTop = styled.div`
   position: absolute;
-  margin-left: 250px;
-  top: 70px;
+  margin-left: 130px;
+  top: 10px;
   background-color: #fff;
 `;
 
@@ -29,6 +28,7 @@ export const OrderTopButton = styled.button`
   font-weight: 700;
   display: flex;
   justify-content: center;
+  background-color: #fff;
   
   span {
       padding-top: 20px;

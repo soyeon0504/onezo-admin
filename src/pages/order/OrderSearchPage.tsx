@@ -93,7 +93,7 @@ const OrderSearchPage = () => {
         <InnerWrap>
           <Top>
             <div className="title">주문 조회</div>
-            <hr />
+            {/* <hr /> */}
           {/* 날짜 선택 */}
             <DateInput>
               <input placeholder="날짜를 선택하세요"></input>
