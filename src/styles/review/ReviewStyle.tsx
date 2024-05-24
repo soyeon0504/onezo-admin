@@ -44,25 +44,25 @@ export const ReviewItem = styled.div`
   display: flex;
   align-items: center;
   padding: 7px 15px;
-  width: 990px;
+  width: 1000px;
   border: 1px solid #d9d9d9;
   margin: 0 auto;
   div {
-    width: 730px;
+    width: 720px;
     display: flex;
-    padding-right: 30px;
   }
   p {
     font-size: 20px;
     font-weight: 600;
     padding: 10px 0;
     line-height: 30px;
-  }
-  p:nth-of-type(1) {
     margin-right: 20px;
   }
+  p:nth-of-type(2) {
+    width: 600px;
+  }
   span {
-    width: 150px;
+    width: 140px;
     color: #777;
     font-size: 20px;
   }

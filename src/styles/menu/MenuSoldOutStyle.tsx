@@ -28,18 +28,20 @@ export const CateSelect = styled.div`
   }
 `;
 export const SoldOutMenuWrap = styled.div`
-  width: 990px;
+  width: 1000px;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 10px;
+  column-gap: 20px;
   margin: 0 auto;
+  /* background: beige; */
 `;
 export const SoldOutMenuItem = styled.div`
   display: flex;
   align-items: center;
-  width: 480px;
+  width: 490px;
   height: 120px;
-  gap: 10px;
+  gap: 20px;
   border: 1px solid #d9d9d9;
   padding: 0 20px;
   img {
@@ -47,7 +49,7 @@ export const SoldOutMenuItem = styled.div`
     height: 80px;
   }
   p {
-    width: 270px;
+    width: 260px;
     color: #000;
     font-size: 20px;
     font-weight: 600;

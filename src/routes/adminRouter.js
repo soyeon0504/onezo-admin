@@ -19,7 +19,7 @@ const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage.tsx
 // 리뷰관리
 const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
 // 매출 관리
-const LazySalesPage = lazy(() => import("../pages/sales/SalesPage"));
+const LazySalesPage = lazy(() => import("../pages/sales/SalesPage.tsx"));
 // 공지 등록
 const LazyNoticePage = lazy(() =>
   import("../pages/notice/NoticePage.js"),
