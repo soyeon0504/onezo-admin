@@ -1,55 +1,50 @@
 import styled from "@emotion/styled";
 
 export const Wrap = styled.div`
-  width: 100vw;
+  width: 1080px;
+  margin: 0 auto;
 `;
 export const InnerWrap = styled.div`
-  max-width: 1300px;
   margin: 0 auto;
 `;
 export const Top = styled.div`
 position: absolute;
-width: 1300px;
+width: 1080px;
 margin: 0 auto;
-top: 80px;
+top: 26px;
   .title {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
-    padding-left: 220px;
+    padding-left: 10px;
     padding-bottom: 22px;
-  }
-  hr {
-    width: 1000px;
-    border: 1px solid #000;
+    border-bottom: 1px solid #000;
   }
 `;
 
 export const DateInput = styled.div`
  position: absolute;
   right: 0px;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 20px;
+  padding-right: 100px;
 input {
-  top: 0;
-  right: 150px;
-  position: absolute;
   width: 313px;
   height: 40px;
   border: 1px solid #a9a7a7;
   border-radius: 5px;
+  padding-left: 15px;
+  font-size: 16px;
 }
 `;
 
 export const MainWrap = styled.div`
-width: 1300px;
-margin: 0 auto;
+/* margin: 0 auto; */
 `;
 
 export const OrderBoxWrap = styled.div`
-  padding-left: 250px;
+  padding-left: 80px;
   position: absolute;
-  top: 200px;
-  padding-top: 25px;
+  top: 150px;
 `;
 
 export const OrderBox = styled.div`
