@@ -20,7 +20,7 @@ const orderData = [
   {
     time: "13:33",
     totalCount: "2",
-    price: "22000",
+    price: "10000",
     type: "포장",
     menu: "원조바삭후라이드",
     menuCount: "1",
@@ -83,7 +83,7 @@ const CookingComponent = () => {
   return (
     <>
       <Wrap>
-        <OrderAbout />
+        {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
             {orderData && orderData.map((item, index) => (

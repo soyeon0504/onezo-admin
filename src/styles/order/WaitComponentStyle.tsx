@@ -1,21 +1,24 @@
 import styled from "@emotion/styled";
 
 export const Wrap = styled.div`
-  width: 100vw;
+  width: 1080;
+  margin: 0 auto;
 `;
 
 export const InnerWrap = styled.div`
-  max-width: 1300px;
+  width: 1080px;
   margin: 0 auto;
 `;
 
 export const OrderBoxWrap = styled.div`
-padding-left: 250px;
+padding-left: 130px;
 position: absolute;
-top: 200px;
+margin: 0  auto;
+top: 120px;
 `
 
 export const OrderBox = styled.div`
+
   display: flex;
   width: 900px;
   height: 200px;
@@ -115,11 +118,19 @@ height: 80px;
 color: #fff;
 border: none;
 background-color: #FF8B38;
+font-size: 25px;
+font-weight: 700;
+margin-top: 30px;
+margin-left: 10px;
 `
 export const CancleButton = styled.button`
+position: absolute;
 border: none;
 color: #fff;
 width: 100px;
 height: 50px;
 background-color: #ff0000;
+font-size: 25px;
+font-weight: 700;
+right: 20px;
 `

@@ -8,10 +8,10 @@ export const InnerWrap = styled.div`
   margin: 0 auto;
 `;
 export const Top = styled.div`
-position: absolute;
-width: 1080px;
-margin: 0 auto;
-top: 26px;
+  position: absolute;
+  width: 1080px;
+  margin: 0 auto;
+  top: 26px;
   .title {
     font-size: 24px;
     font-weight: 700;
@@ -22,23 +22,23 @@ top: 26px;
 `;
 
 export const DateInput = styled.div`
- position: absolute;
+  position: absolute;
   right: 0px;
   margin-top: 15px;
   margin-bottom: 20px;
   padding-right: 100px;
-input {
-  width: 313px;
-  height: 40px;
-  border: 1px solid #a9a7a7;
-  border-radius: 5px;
-  padding-left: 15px;
-  font-size: 16px;
-}
+  input {
+    width: 313px;
+    height: 40px;
+    border: 1px solid #a9a7a7;
+    border-radius: 5px;
+    padding-left: 15px;
+    font-size: 16px;
+  }
 `;
 
 export const MainWrap = styled.div`
-/* margin: 0 auto; */
+  /* margin: 0 auto; */
 `;
 
 export const OrderBoxWrap = styled.div`
@@ -53,6 +53,7 @@ export const OrderBox = styled.div`
   height: 200px;
   border: 1px solid #a9a7a7;
   margin-bottom: 40px;
+  justify-content: space-between;
 `;
 
 export const OrderBoxInner = styled.div`
@@ -111,24 +112,15 @@ export const MenuWrap = styled.div`
   }
 `;
 
-export const ButtonWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 175px;
-  height: 140px;
-  justify-content: space-between;
-`;
 
 export const CancleButton = styled.button`
-  position: absolute;
-  top: 25px;
-  right: 20px;
   border: none;
-  border-radius: 5px;
   color: #fff;
   width: 100px;
   height: 50px;
   background-color: #ff0000;
   font-size: 25px;
   font-weight: 700;
+  margin-right: 20px;
+  margin-top: 20px;
 `;
