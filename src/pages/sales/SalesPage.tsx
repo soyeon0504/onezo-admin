@@ -1,78 +1,79 @@
 import React from "react";
-import { Salesstyle } from "../../styles/sales/SalesStyle";
+import { SalesTable, SalesTableHeader, Salesstyle } from "../../styles/sales/SalesStyle";
 import { ResponsiveBar } from "@nivo/bar";
 
+// 더미데이터
 const getData = {
   data: [
     {
       date: "2024.05.18",
       매장: 163,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 87,
       포장: 176,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 103,
     },
     {
       date: "2024.05.19",
       매장: 263,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 276,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.20",
       매장: 163,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 176,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.21",
       매장: 163,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 176,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.22",
       매장: 163,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 176,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.23",
       매장: 163,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 176,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.24",
       매장: 93,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 206,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.25",
       매장: 183,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 76,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.26",
       매장: 233,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 116,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
     {
       date: "2024.05.27",
       매장: 33,
-      매장Color: "hsl(174, 70%, 50%)",
+      매장_건수: 134,
       포장: 216,
-      포장Color: "hsl(323, 70%, 50%)",
+      포장_건수: 159,
     },
   ],
 };
@@ -86,8 +87,7 @@ const SalesLine = ({ data }) => (
     padding={0.4}
     valueScale={{ type: "linear" }}
     indexScale={{ type: "band", round: true }}
-    colors={{ scheme: 'set3' }}
-    
+    colors={{ scheme: "set3" }}
     borderColor={{
       from: "color",
       modifiers: [["darker", 1.6]],
@@ -156,10 +156,24 @@ const SalesPage = () => {
     <>
       <Salesstyle>
         <h1>&nbsp;&nbsp;매출 관리</h1>
-          <div style={{ width: "100%", height: "500px" }}>
+        <div style={{ width: "100%", height: "500px" }}>
           <p>(단위: 만 원)</p>
-            {SalesLine(getData)}
-          </div>
+          {SalesLine(getData)}
+        </div>
+        <SalesTableHeader>
+          <span>전체 매출</span>
+          <span>매장 매출</span>
+          <span>포장 매출</span>
+        </SalesTableHeader>
+        {getData.data.map((item, index) => (
+          <SalesTable key={index}>
+            <span>{index + 1}.</span>
+            <span>{item.date}</span>
+            <span>{item.매장 + item.포장}만원({item.매장_건수 + item.포장_건수}건)</span>
+            <span>{item.매장}만원({item.매장_건수}건)</span>
+            <span>{item.포장}만원({item.포장_건수}건)</span>
+          </SalesTable>
+        ))}
       </Salesstyle>
     </>
   );

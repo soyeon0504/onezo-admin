@@ -22,7 +22,7 @@ const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
 const LazySalesPage = lazy(() => import("../pages/sales/SalesPage.tsx"));
 // 공지 등록
 const LazyNoticePage = lazy(() =>
-  import("../pages/notice/NoticePage.js"),
+  import("../pages/notice/NoticePage.tsx"),
 );
 // 메뉴 등록
 // const LazyMenuRegisterPage = lazy(() =>
