@@ -82,7 +82,7 @@ const WaitComponent = () => {
   return (
     <>
       <Wrap>
-        <OrderAbout />
+        {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
             {orderData && orderData.map((item, index) => (

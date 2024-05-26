@@ -81,3 +81,36 @@ export const SaveBt = styled(CancelBt)`
   color: #fff;
   cursor: pointer;
 `;
+
+// TimeSettingModal
+export const SelectWrap = styled.div`
+select {
+  border: 1px solid #000;
+  width: 400px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  padding-left: 13px;
+}
+`
+
+export const TimeSettingWrap = styled.div`
+font-size: 15px;
+font-weight: 700;
+input {
+  width: 109px;
+  height: 32px;
+  border: 1.5px solid #000;
+}
+`
+export const TimeSettingFrom = styled.div`
+display: flex;
+justify-content: space-evenly;
+width: 300px;
+align-items: center;
+`
+export const TimeSettingTo = styled.div`
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+`

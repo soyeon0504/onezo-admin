@@ -11,15 +11,12 @@ import {
 import { useState } from "react";
 
 const TimePauseModal = ({ onClose }) => {
-  // 수량 상태를 정의합니다.
   const [quantity, setQuantity] = useState(30);
 
-  // 수량을 증가시키는 함수입니다.
+  // 수량 증가, 감소
   const increaseQuantity = () => {
     setQuantity(prevQuantity => prevQuantity + 10);
   };
-
-  // 수량을 감소시키는 함수입니다.
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(prevQuantity => prevQuantity - 10);

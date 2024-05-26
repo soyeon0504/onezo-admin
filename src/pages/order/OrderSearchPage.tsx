@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ButtonWrap,
   CancleButton,
   DateInput,
   InnerWrap,
@@ -13,9 +12,8 @@ import {
   PriceWrap,
   TimeWrap,
   Top,
-  Wrap,
+  Wrap
 } from "../../styles/order/OrderSearchStyle";
-import Layout from "../../layouts/Layout"
 
 const orderData = [
   {
@@ -93,8 +91,7 @@ const OrderSearchPage = () => {
         <InnerWrap>
           <Top>
             <div className="title">주문 조회</div>
-            {/* <hr /> */}
-          {/* 날짜 선택 */}
+            {/* 날짜 선택 */}
             <DateInput>
               <input placeholder="날짜를 선택하세요"></input>
             </DateInput>
@@ -126,10 +123,8 @@ const OrderSearchPage = () => {
                           </div>
                         </MenuWrap>
                       </PriceMenuWrap>
-                      <ButtonWrap>
-                        <CancleButton>취소</CancleButton>
-                      </ButtonWrap>
                     </OrderBoxInner>
+                    <CancleButton>취소</CancleButton>
                   </OrderBox>
                 ))}
             </OrderBoxWrap>

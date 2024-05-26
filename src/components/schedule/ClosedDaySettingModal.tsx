@@ -1,5 +1,5 @@
 import React from "react";
-import { CancelBt, SaveBt } from "../../styles/schedule/ScheduleModalStyle";
+import { CancelBt, SaveBt } from "../../styles/schedule/ScheduleModalStyle.tsx";
 
 const ClosedDaySettingModal = ({ onClose }) => {
   return (
