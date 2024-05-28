@@ -20,6 +20,10 @@ const LazyMenuSoldOutPage = lazy(() => import("../pages/menu/MenuSoldOutPage.tsx
 const LazyReviewPage = lazy(() => import("../pages/review/ReviewPage.tsx"));
 // 매출 관리
 const LazySalesPage = lazy(() => import("../pages/sales/SalesPage.tsx"));
+// 공지 목록
+const LazyNoticeListPage = lazy(() =>
+  import("../pages/notice/NoticeListPage.tsx"),
+);
 // 공지 등록
 const LazyNoticePage = lazy(() =>
   import("../pages/notice/NoticePage.tsx"),
@@ -81,7 +85,15 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "notice",
+      path: "notice_list",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <LazyNoticeListPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "notice_register",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyNoticePage />

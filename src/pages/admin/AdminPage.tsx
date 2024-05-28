@@ -20,7 +20,7 @@ const AdminPage = () => {
         "soldout",
         "review",
         "sales",
-        "notice",
+        "notice_list",
       ],
       list: [
         "주문 관리",
@@ -68,7 +68,7 @@ const AdminPage = () => {
           (name === "soldout" && subItem === "메뉴 품절") ||
           (name === "review" && subItem === "리뷰 관리") ||
           (name === "sales" && subItem === "매출 관리") ||
-          (name === "notice" && subItem === "공지 관리")
+          (name === "notice_list" && subItem === "공지 관리")
         );
       });
 
