@@ -122,6 +122,7 @@ font-size: 25px;
 font-weight: 700;
 margin-top: 30px;
 margin-left: 10px;
+cursor: pointer;
 `
 export const CancleButton = styled.button`
 position: absolute;
@@ -133,4 +134,5 @@ background-color: #ff0000;
 font-size: 25px;
 font-weight: 700;
 right: 20px;
+cursor: pointer;
 `

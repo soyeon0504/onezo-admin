@@ -123,4 +123,5 @@ export const CancleButton = styled.button`
   font-weight: 700;
   margin-right: 20px;
   margin-top: 20px;
+  cursor: pointer;
 `;

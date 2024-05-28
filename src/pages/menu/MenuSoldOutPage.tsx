@@ -5,6 +5,8 @@ import {
   SoldOutMenuWrap,
   SoldOutstyle,
 } from "../../styles/menu/MenuSoldOutStyle";
+import SoldOutModal from "../../components/soldout/SoldOutModal";
+import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle.tsx";
 
 // 카테고리
 const menuCate = [
@@ -41,6 +43,7 @@ const menuData = [
     menuName: "원조 후라이드",
     price: "18,000원",
     menuCategory: "ALL",
+    soldOutStatus: "y",
   },
   {
     id: 2,
@@ -48,6 +51,7 @@ const menuData = [
     menuName: "제로콜라",
     price: "18,000원",
     menuCategory: "DRINK",
+    soldOutStatus: "y",
   },
   {
     id: 3,
@@ -55,6 +59,7 @@ const menuData = [
     menuName: "원조 후라이드",
     price: "18,000원",
     menuCategory: "CHICKEN",
+    soldOutStatus: "y",
   },
   {
     id: 4,
@@ -62,6 +67,7 @@ const menuData = [
     menuName: "원조 후라이드",
     price: "18,000원",
     menuCategory: "CHICKEN",
+    soldOutStatus: "n",
   },
   {
     id: 5,
@@ -69,6 +75,7 @@ const menuData = [
     menuName: "양념소스",
     price: "18,000원",
     menuCategory: "SAUCE",
+    soldOutStatus: "y",
   },
   {
     id: 6,
@@ -76,6 +83,7 @@ const menuData = [
     menuName: "원조 후라이드",
     price: "18,000원",
     menuCategory: "CHICKEN",
+    soldOutStatus: "y",
   },
   {
     id: 7,
@@ -90,6 +98,7 @@ const menuData = [
     menuName: "감자튀김",
     price: "18,000원",
     menuCategory: "SIDE",
+    soldOutStatus: "y",
   },
   {
     id: 9,
@@ -97,13 +106,31 @@ const menuData = [
     menuName: "감자튀김",
     price: "18,000원",
     menuCategory: "SIDE",
+    soldOutStatus: "n",
   },
 ];
 
 const MenuSoldOutPage = () => {
+  // 카테고리 선택
   const [type, setType] = useState<number>(0);
+
+  // 품절버튼 클릭
+  const [soldOutModal, setSoldOutModal] = useState<boolean>(false);
+  const handleSoldOutModal = () => {
+    setSoldOutModal(true);
+  };
+  const closeSoldOutModal = () => {
+    setSoldOutModal(false);
+  };
+
   return (
     <>
+      {soldOutModal && (
+        <>
+          <SoldOutModal soldOutStatus={menuData[0].soldOutStatus} onCloseModal={closeSoldOutModal}/>
+          <ModalBackground/>
+        </>
+      )}
       <SoldOutstyle>
         <h1>&nbsp;&nbsp;메뉴 품절</h1>
         <CateSelect>
@@ -122,7 +149,13 @@ const MenuSoldOutPage = () => {
             <SoldOutMenuItem key={item.id}>
               <img src={item.menuImage} />
               <p>{item.menuName}</p>
-              <button>품절</button>
+              {item.soldOutStatus === "y" ? (
+                <button onClick={handleSoldOutModal}>판매 중</button>
+              ) : (
+                <button onClick={handleSoldOutModal} className="soldout">
+                  품절
+                </button>
+              )}
             </SoldOutMenuItem>
           ))}
         </SoldOutMenuWrap>

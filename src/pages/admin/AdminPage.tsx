@@ -29,7 +29,7 @@ const AdminPage = () => {
         "메뉴 품절",
         "리뷰 관리",
         "매출 관리",
-        "공지 등록",
+        "공지 관리",
       ],
     },
   ];
@@ -68,7 +68,7 @@ const AdminPage = () => {
           (name === "soldout" && subItem === "메뉴 품절") ||
           (name === "review" && subItem === "리뷰 관리") ||
           (name === "sales" && subItem === "매출 관리") ||
-          (name === "notice" && subItem === "공지 등록")
+          (name === "notice" && subItem === "공지 관리")
         );
       });
 

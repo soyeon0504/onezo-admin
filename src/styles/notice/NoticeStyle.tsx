@@ -14,16 +14,17 @@ export const Noticestyle = styled.div`
 
 export const NoticeInputForm = styled.form`
   width: 980px;
-  height: 640px;
+  height: 650px;
   border-radius: 10px;
   border: 1px solid #572a01;
   background: #fff;
   margin: 50px auto;
   padding: 60px 0 0 90px;
+  text-align: center;
   div {
     display: flex;
     gap: 160px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   span {
     color: #000;
@@ -57,6 +58,7 @@ export const TitleSection = styled.div`
   }
 `;
 export const ContentSection = styled.div`
+  margin-top: 20px;
   textarea {
     width: 600px !important;
     height: 200px;
@@ -66,4 +68,17 @@ export const ContentSection = styled.div`
     padding: 10px;
     resize: none;
   }
+`;
+export const RegisterBt = styled.button`
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background: #ff8b38;
+  border: none;
+  margin-top: 30px;
+  cursor: pointer;
+
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
 `;

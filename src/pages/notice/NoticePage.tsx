@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { ContentSection, NoticeInputForm, Noticestyle, PhotoSection, TitleSection } from "../../styles/notice/NoticeStyle";
+import React, { useRef, useState } from "react";
+import { ContentSection, NoticeInputForm, Noticestyle, PhotoSection, RegisterBt, TitleSection } from "../../styles/notice/NoticeStyle";
 
 const NoticePage = () => {
   // 이미지 업로드
   const [uploadImg, setUploadImg] = useState<string>(
     `${process.env.PUBLIC_URL}/images/notice/notice_img.svg`,
   );
-  const [uploadImgFile, setUploadImgFile] = useState(null);
+  const [uploadImgFile, setUploadImgFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleChangeFileOne = e => {
-    const file = e.target.files[0];
+  const handleChangeFileOne = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       // 미리보기
       const tempUrl = URL.createObjectURL(file);
@@ -31,7 +32,7 @@ const NoticePage = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    document.getElementById("img").click();
+                    fileInputRef.current?.click();
                   }}
                 >
                   <img src={uploadImg} alt="" />
@@ -41,12 +42,8 @@ const NoticePage = () => {
                 type="file"
                 // {...register("photo")}
                 accept="image/png, image/gif, image/jpeg"
-                onClick={() => {
-                  document.getElementById("img").click();
-                }}
-                onChange={event => {
-                  handleChangeFileOne(event);
-                }}
+                onChange={handleChangeFileOne}
+                ref={fileInputRef} // ref 속성을 통해 요소와 연결
                 id="img"
                 style={{ display: "none" }}
               />
@@ -60,6 +57,7 @@ const NoticePage = () => {
             <span>내용</span>
             <textarea />
           </ContentSection>
+          <RegisterBt>등록하기</RegisterBt>
         </NoticeInputForm>
       </Noticestyle>
     </>
