@@ -1,9 +1,14 @@
-import React from 'react'
+import axios from "axios";
+import { SERVER_URL } from "../config";
 
-const menu_api = () => {
-  return (
-    <div>menu_api</div>
-  )
-}
+// 메뉴 조회
+export const getMenu = async (store_id) => {
+  try {
+    const url = `${SERVER_URL}/menu/soldOut/select/${store_id}`;
 
-export default menu_api
+    const res = await axios.get(url);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

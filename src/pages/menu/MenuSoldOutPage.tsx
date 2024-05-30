@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CateSelect,
   SoldOutMenuItem,
@@ -7,6 +7,7 @@ import {
 } from "../../styles/menu/MenuSoldOutStyle";
 import SoldOutModal from "../../components/soldout/SoldOutModal";
 import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle.tsx";
+import { getMenu } from "../../api/menu/menu_api.js";
 
 // 카테고리
 const menuCate = [
@@ -111,6 +112,36 @@ const menuData = [
 ];
 
 const MenuSoldOutPage = () => {
+  const [data, setData] = useState(null);
+  const [menu_id, setMenu_id] = useState<number>(0)
+  const [menu_name, setMenu_name] = useState<string>("")
+  const [menu_image, setMenu_image] = useState<string>("")
+  const [sold_out_yn, setSold_out_yn] = useState<string>("")
+  // store_id 값
+  const store_id = 1; // 로그인 연동 후 수정하기
+
+  // 데이터 연동(메뉴 조회)
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getMenu(store_id);
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+  console.log("data:", data)
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setMenu_id(data.menu_id);
+  //     setMenu_name(data.menu_name);
+  //     setMenu_image(data.menu_image);
+  //     setSold_out_yn(data.sold_out_yn);
+  //   }
+  // }, [data]);
   // 카테고리 선택
   const [type, setType] = useState<number>(0);
 
@@ -145,11 +176,11 @@ const MenuSoldOutPage = () => {
           </select>
         </CateSelect>
         <SoldOutMenuWrap>
-          {menuData.map(item => (
-            <SoldOutMenuItem key={item.id}>
-              <img src={item.menuImage} />
-              <p>{item.menuName}</p>
-              {item.soldOutStatus === "y" ? (
+          {data && data.map(item => (
+            <SoldOutMenuItem key={item.menu_id}>
+              <img src={item.menu_image} />
+              <p>{item.menu_name}</p>
+              {item.sold_out_yn === "N" ? (
                 <button onClick={handleSoldOutModal}>판매 중</button>
               ) : (
                 <button onClick={handleSoldOutModal} className="soldout">
