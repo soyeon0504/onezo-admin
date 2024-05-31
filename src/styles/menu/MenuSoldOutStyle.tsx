@@ -13,7 +13,7 @@ export const SoldOutstyle = styled.div`
 `;
 
 export const CateSelect = styled.div`
-  margin-left: 850px;
+  margin: 20px 0px 20px 850px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,6 @@ export const CateSelect = styled.div`
   height: 35px;
   border: 1px solid #bebebe;
   border-radius: 5px;
-  margin-bottom: 20px;
   select {
     width: 160px;
     border: none;
