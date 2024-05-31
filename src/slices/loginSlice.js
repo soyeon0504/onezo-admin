@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { loginPost } from "../api/login/login_api";
+import { loginPost } from "../api/login/login_api";
 import { getCookie, removeCookie, setCookie } from "../util/cookieUtil";
 
 export const loginPostAsync = createAsyncThunk(
@@ -15,7 +15,7 @@ export const loginPostAsync = createAsyncThunk(
 );
 
 const initState = {
-  memberId: null,
+  accessToken: "",
 };
 
 const loadMemberCookie = () => {
@@ -31,13 +31,13 @@ const loginSlice = createSlice({
     login: (state, action) => {
       console.log("login");
       //console.log(action.payload);
-      return { memberId: action.payload.memberId };
+      return { accessToken: action.payload.accessToken };
     },
     logout: (state, action) => {
       console.log("logout");
       removeCookie("member", "/");
-      // sessionStorage.removeItem('isLogin');
-      // sessionStorage.removeItem('userAuth');
+      sessionStorage.removeItem('isLogin');
+      sessionStorage.removeItem('userAuth');
       return { ...initState };
     },
   },
@@ -49,11 +49,11 @@ const loginSlice = createSlice({
         console.log("payload", payload);
         if (!payload.error) {
           setCookie("member", JSON.stringify(payload));
-        //   sessionStorage.setItem('isLogin', 'true');
-        //   sessionStorage.setItem('userAuth', action.payload.auth);
-        //   return {...state, isLogin: true, iuser: payload.iuser }
-        // } else {
-        //   console.log(payload.error);
+          sessionStorage.setItem('isLogin', 'true');
+          sessionStorage.setItem('userAuth', action.payload.auth);
+          return {...state, isLogin: true, iuser: payload.iuser }
+        } else {
+          console.log(payload.error);
         }
         return payload;
       })
