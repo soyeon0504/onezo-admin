@@ -20,22 +20,18 @@ export const OrderTopInner = styled.div`
   justify-content: space-between;
 `;
 
-export const OrderTopButton = styled.button`
+export const OrderTopButton = styled.button<{$focus:boolean}>`
   width: 300px;
   height: 70px;
-  border: 1px solid #a9a7a7;
+  border: 1px solid ${({$focus})=> $focus ? '#ff8b38': '#a9a7a7' };
+  color: ${({$focus})=> $focus ? "#fff" : "#000"};
   font-size: 24px;
   font-weight: 700;
   display: flex;
   justify-content: center;
-  background-color: #fff;
-  
+  background-color: ${({$focus})=> $focus ? '#ff8b38': '#fff' };
+  cursor: pointer;
   span {
       padding-top: 20px;
-  }
-  &:hover {
-    background-color: #ff8b38;
-    color: #fff;
-    cursor: pointer;
   }
 `;

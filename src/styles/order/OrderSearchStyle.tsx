@@ -35,6 +35,12 @@ export const DateInput = styled.div`
     padding-left: 15px;
     font-size: 16px;
   }
+  img {
+    position: absolute;
+    padding-top: 7px;
+    right: 110px;
+    cursor: pointer;
+  }
 `;
 
 export const MainWrap = styled.div`
@@ -123,4 +129,5 @@ export const CancleButton = styled.button`
   font-weight: 700;
   margin-right: 20px;
   margin-top: 20px;
+  cursor: pointer;
 `;

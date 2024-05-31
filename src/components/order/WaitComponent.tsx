@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AcceptBt,
   ButtonWrap,
@@ -14,6 +14,7 @@ import {
   Wrap,
 } from "../../styles/order/WaitComponentStyle";
 import OrderAbout from '../../components/order/OrderAbout'
+import { getOrderState } from "../../api/order/order_api";
 
 const orderData = [
   {
@@ -79,10 +80,34 @@ const orderData = [
 ]
 
 const WaitComponent = () => {
+
+  // 전달 받은 데이터
+  const [orderState, setOrderState] = useState();
+
+  const handleClickAccept = async(item) => {
+    if(item.status === "") {
+      try {
+        const res = await getOrderState();
+        setOrderState(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  };
+
+  const handleClickReject = async(item) => {
+    if(item.status === "") {
+      try {
+        const res = await getOrderState();
+        setOrderState(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  };
   return (
     <>
       <Wrap>
-        {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
             {orderData && orderData.map((item, index) => (
@@ -103,10 +128,10 @@ const WaitComponent = () => {
                   </MenuWrap>
                 </PriceMenuWrap>
                 <ButtonWrap>
-                  <AcceptBt>
+                  <AcceptBt onClick={handleClickAccept()}>
                     <button>접수하기</button>
                   </AcceptBt>
-                  <RejectBt>
+                  <RejectBt onClick={handleClickReject()}>
                     <button>주문거부</button>
                   </RejectBt>
                 </ButtonWrap>

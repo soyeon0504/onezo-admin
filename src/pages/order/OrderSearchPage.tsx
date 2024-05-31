@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CancleButton,
   DateInput,
@@ -12,8 +12,15 @@ import {
   PriceWrap,
   TimeWrap,
   Top,
-  Wrap
+  Wrap,
 } from "../../styles/order/OrderSearchStyle";
+import Calendar from "react-calendar";
+import moment from "moment";
+import "react-calendar/dist/Calendar.css";
+import OrderCancelModal from "../../components/order/OrderCancelModal";
+import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle";
+import { useEffect } from "react";
+import { getOrderAllList } from "../../api/order/order_api";
 
 const orderData = [
   {
@@ -84,9 +91,70 @@ const orderData = [
   },
 ];
 
-const OrderSearchPage = () => {
+const orderList = [
+  {
+    "orderId": 1,
+    "storeId": 1,
+    "memberId": 1,
+    "status": "BEFORE_COOKING",
+    "orderDate": "2024-05-31T14:24:14.000+00:00",
+    "takeInOut": "TAKEOUT",
+    "orderItems": [
+      {
+        "orderItemId": 1,
+        "orderId": 1,
+        "menuId": 85,
+        "quantity": 3
+      }
+    ]
+  }
+]
+
+const OrderSearchPage = ({ onChange, value }) => {
+  // 전달 받을 주문 리스트
+  const [orderList, setOrderList] = useState([]);
+
+  const [orderCancelModal, setOrderCancelModal] = useState(false);
+
+  const [nowDate, setNowDate] = useState("날짜");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickCalendar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleDateChange = selectedDate => {
+    onChange(selectedDate);
+    setIsOpen(false);
+    setNowDate(moment(selectedDate).format("YYYY년 MM월 DD일"));
+  };
+
+  
+  const handleOrderCancel = () => {
+    setOrderCancelModal(true);
+  };
+
+  const closeModal = () => {
+    setOrderCancelModal(false);
+  };
+
+  // useEffect(() => {
+  //   try {
+  //     const res = getOrderAllList;
+  //     setOrderList(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },[])
+
   return (
     <>
+    {orderCancelModal && (
+      <>
+      <OrderCancelModal onClose={closeModal}/>
+      <ModalBackground />
+      </>
+    )}
       <Wrap>
         <InnerWrap>
           <Top>
@@ -94,6 +162,25 @@ const OrderSearchPage = () => {
             {/* 날짜 선택 */}
             <DateInput>
               <input placeholder="날짜를 선택하세요"></input>
+              <img
+                src="../../images/admin/calendar.svg"
+                onClick={handleClickCalendar}
+              />
+              {nowDate}
+              {isOpen && (
+                <>
+                  <Calendar
+                    // isOpen={isOpen}
+                    onChange={handleDateChange}
+                    value={value}
+                    formatDay={(locale, date) => moment(date).format("DD")}
+                    // formatDay={(locale, date) =>
+                    // date.toLocaleString('en', { day: 'numeric' })
+                    // }
+                    // showNeighboringMonth={false}
+                  />
+                </>
+              )}
             </DateInput>
           </Top>
           <MainWrap>
@@ -124,7 +211,9 @@ const OrderSearchPage = () => {
                         </MenuWrap>
                       </PriceMenuWrap>
                     </OrderBoxInner>
-                    <CancleButton>취소</CancleButton>
+                    <CancleButton onClick={() => handleOrderCancel()}>
+                      취소
+                    </CancleButton>
                   </OrderBox>
                 ))}
             </OrderBoxWrap>

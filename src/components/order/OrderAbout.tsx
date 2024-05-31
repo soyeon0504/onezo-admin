@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   InnerWrap,
   OrderTop,
@@ -9,32 +9,27 @@ import {
 import WaitComponent from "../../components/order/WaitComponent";
 import CookingComponent from "../../components/order/CookingComponent";
 import CompletedComponent from "../../components/order/CompletedComponent";
+import { getOrderState } from "../../api/order/order_api";
 
 const OrderAbout = () => {
-  const [activeComponent, setActiveComponent] = useState("");
-
-  const [focus, setFocus] = useState("");
-
-  const handleButtonClick = (component) => {
+  const [activeComponent, setActiveComponent] = useState("wait");
+  const [focus, setFocus] = useState("wait");
+  // 전달 받은 데이터
+  const [orderState, setOrderState] = useState();
+  
+  const handleButtonClick = async(component:string, item:string) => {
+    if(item === "") {
+      try {
+        const res = await getOrderState();
+        setOrderState(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
     setActiveComponent(component);
     console.log("Button clicked:", component);
   };
 
-  let componentToRender;
-  switch (activeComponent) {
-    case "wait":
-      componentToRender = <WaitComponent />;
-      break;
-    case "cooking":
-      componentToRender = <CookingComponent />;
-      break;
-    case "completed":
-      componentToRender = <CompletedComponent />;
-      break;
-    default:
-      componentToRender = <WaitComponent />;
-      console.log("componentToRender:", componentToRender);
-  }
 
   return (
     <div>
@@ -43,37 +38,40 @@ const OrderAbout = () => {
           <OrderTop>
             <OrderTopInner>
               <OrderTopButton
+              $focus={focus === "wait"}
                 key={`wait`}
                 onClick={() => {
-                  setFocus
-                  handleButtonClick("wait")
+                  setFocus("wait");
+                  handleButtonClick("wait");
                 }}
                 style={{
-                outline: focus === "wait" ? "2px solid blue" : "none",
-              }}
+                  borderRight: "none",
+                }}
               >
-                <span>주문 대기 3건</span>
+                <span>주문 대기 {}건</span>
               </OrderTopButton>
               <OrderTopButton
                 key={`cooking`}
+                $focus={focus === "cooking"}
                 onClick={() => {
-                  setFocus
-                  handleButtonClick("cooking")
+                  setFocus("cooking");
+                  handleButtonClick("cooking");
                 }}
                 style={{
-                  outline: focus === "cooking" ? "2px solid blue" : "none",
                 }}
               >
-                <span>조리 중 4건</span>
+                <span>조리 중 {}건</span>
               </OrderTopButton>
               <OrderTopButton
                 key={`completed`}
+                $focus={focus === "completed"}
                 onClick={() => {
-                  setFocus
-                  handleButtonClick("completed")
+                  setFocus("completed");
+                  handleButtonClick("completed");
                 }}
+
                 style={{
-                  outline: focus === "completed" ? "2px solid blue" : "none",
+                  borderLeft: "none",
                 }}
               >
                 <span>조리 완료</span>
@@ -82,8 +80,8 @@ const OrderAbout = () => {
           </OrderTop>
           {activeComponent === "wait" && <WaitComponent />}
           {activeComponent === "cooking" && <CookingComponent />}
-          {activeComponent === "completed" && <CompletedComponent />}        
-          </InnerWrap>
+          {activeComponent === "completed" && <CompletedComponent />}
+        </InnerWrap>
       </Wrap>
     </div>
   );
