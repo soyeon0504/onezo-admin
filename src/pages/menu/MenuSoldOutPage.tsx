@@ -113,26 +113,27 @@ const menuData = [
 
 const MenuSoldOutPage = () => {
   const [data, setData] = useState(null);
-  const [menu_id, setMenu_id] = useState<number>(0)
-  const [menu_name, setMenu_name] = useState<string>("")
-  const [menu_image, setMenu_image] = useState<string>("")
-  const [sold_out_yn, setSold_out_yn] = useState<string>("")
+  const [menu_id, setMenu_id] = useState<number>(0);
+  const [menu_name, setMenu_name] = useState<string>("");
+  const [menu_image, setMenu_image] = useState<string>("");
+  const [sold_out_yn, setSold_out_yn] = useState<string>("");
   // store_id 값
   const store_id = 1; // 로그인 연동 후 수정하기
 
   // 데이터 연동(메뉴 조회)
+  const [menu_category, setMenu_category] = useState<string>("ALL");
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await getMenu(store_id);
+        const res = await getMenu(menu_category);
         setData(res);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, []);
-  console.log("data:", data)
+  }, [menu_category]);
+  console.log("data:", data);
 
   // useEffect(() => {
   //   if (data) {
@@ -143,7 +144,7 @@ const MenuSoldOutPage = () => {
   //   }
   // }, [data]);
   // 카테고리 선택
-  const [type, setType] = useState<number>(0);
+  console.log("카테 : ", menu_category);
 
   // 품절버튼 클릭
   const [soldOutModal, setSoldOutModal] = useState<boolean>(false);
@@ -158,17 +159,20 @@ const MenuSoldOutPage = () => {
     <>
       {soldOutModal && (
         <>
-          <SoldOutModal soldOutStatus={menuData[0].soldOutStatus} onCloseModal={closeSoldOutModal}/>
-          <ModalBackground/>
+          <SoldOutModal
+            soldOutStatus={menuData[0].soldOutStatus}
+            onCloseModal={closeSoldOutModal}
+          />
+          <ModalBackground />
         </>
       )}
       <SoldOutstyle>
         <h1>&nbsp;&nbsp;메뉴 품절</h1>
         <CateSelect>
-          <select onChange={e => setType(Number(e.target.value))}>
+          <select onChange={e => setMenu_category(String(e.target.value))}>
             {menuCate.map(item => {
               return (
-                <option key={item.id} value={item.id}>
+                <option key={item.id} value={item.title}>
                   {item.title}
                 </option>
               );
@@ -176,19 +180,20 @@ const MenuSoldOutPage = () => {
           </select>
         </CateSelect>
         <SoldOutMenuWrap>
-          {data && data.map(item => (
-            <SoldOutMenuItem key={item.menu_id}>
-              <img src={item.menu_image} />
-              <p>{item.menu_name}</p>
-              {item.sold_out_yn === "N" ? (
-                <button onClick={handleSoldOutModal}>판매 중</button>
-              ) : (
-                <button onClick={handleSoldOutModal} className="soldout">
-                  품절
-                </button>
-              )}
-            </SoldOutMenuItem>
-          ))}
+          {data &&
+            data.map(item => (
+              <SoldOutMenuItem key={item.menu_id}>
+                <img src={item.menu_image} />
+                <p>{item.menu_name}</p>
+                {item.sold_out_yn === "N" ? (
+                  <button onClick={handleSoldOutModal}>판매 중</button>
+                ) : (
+                  <button onClick={handleSoldOutModal} className="soldout">
+                    품절
+                  </button>
+                )}
+              </SoldOutMenuItem>
+            ))}
         </SoldOutMenuWrap>
       </SoldOutstyle>
     </>

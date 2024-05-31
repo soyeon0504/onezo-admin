@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useDispatch, useSelector } from "react-redux";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 const Wrap = styled.div`
   position: fixed;
@@ -16,15 +18,30 @@ const InnerWrap = styled.div`
   height: 110px;
   margin: 0 auto;
   align-items: center;
+  button {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+  }
 `;
 
 const Header = () => {
+  // 로그인 & 로그아웃
+  const loginState = useSelector(state => state.loginSlice);
+  const { moveToPath, isLogin, doLogout, userAuth } = useCustomLogin();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    doLogout();
+    moveToPath("/");
+  };
   return (
     <Wrap>
       <InnerWrap>
         <a href="/main">
           <img src="../../images/logo.svg" />
         </a>
+        {isLogin ? <button onClick={handleLogout}>로그아웃</button>:<></>}
       </InnerWrap>
     </Wrap>
   );

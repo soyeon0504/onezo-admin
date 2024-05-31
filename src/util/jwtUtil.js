@@ -51,11 +51,11 @@ const beforeRes = async res => {
     // console.log("7. 위의 정보로 새로운 토큰을 요청합니다.");
     const result = await refreshJWT(
       memberInfo.accessToken,
-      memberInfo.refreshToken,
+      // memberInfo.refreshToken,
     );
     // console.log("8. 요청 이후 되돌아와서 새로운 정보로 쿠키를 업데이트");
     (memberInfo.accessToken = result.accessToken),
-      (memberInfo.refreshToken = result.refreshToken),
+      // (memberInfo.refreshToken = result.refreshToken),
       setCookie("member", JSON.stringify(memberInfo));
 
     // console.log("9. 데이터 요청하던 API 재요청");
