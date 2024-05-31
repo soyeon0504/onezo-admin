@@ -49,9 +49,9 @@ const MainPage = () => {
             <img src="/images/main/sales.png" />
             <p>매출 관리</p>
           </button>
-          <button onClick={() => navigate("/admin/notice")}>
+          <button onClick={() => navigate("/admin/notice_list")}>
             <img src="/images/main/notice.png" />
-            <p>공지 등록</p>
+            <p>공지 관리</p>
           </button>
         </MainLink>
       </MainPageStyle>

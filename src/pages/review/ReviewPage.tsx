@@ -5,6 +5,8 @@ import {
   SearchForm,
 } from "../../styles/review/ReviewStyle.tsx";
 import { PaginationOrange } from "../../styles/Pagination.tsx";
+import ReviewModal from "../../components/review/ReviewModal.tsx";
+import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle.tsx";
 
 // 더미데이터
 const reviewData = [
@@ -100,6 +102,15 @@ const ReviewPage = () => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const [page, setPage] = useState<number>(1);
+
+  // 리뷰작성 모달창
+  const [reviewModal, setReviewModal] = useState<boolean>(false);
+  const handleReviewRegister = () => {
+    setReviewModal(true);
+  };
+  const closeReviewRegister = () => {
+    setReviewModal(false);
+  };
   // 페이지네이션
   const COMMENTS_PER_PAGE = 10;
   const handlePageChange = _tempPage => {
@@ -108,6 +119,15 @@ const ReviewPage = () => {
 
   return (
     <>
+      {reviewModal && (
+        <>
+          <ReviewModal
+            store="경대북문점"
+            onCloseModal={closeReviewRegister}
+          />
+          <ModalBackground/>
+        </>
+      )}
       <ReviewStyle>
         <h1>&nbsp;&nbsp;리뷰 관리</h1>
         <SearchForm>
@@ -135,7 +155,7 @@ const ReviewPage = () => {
                 <p>{item.rating}점</p>
               </div>
               <span>{item.nick}</span>
-              <button>댓글쓰기</button>
+              <button onClick={handleReviewRegister}>댓글쓰기</button>
             </ReviewItem>
           ))}
         <div style={{ textAlign: "center", margin: "20px 0" }}>

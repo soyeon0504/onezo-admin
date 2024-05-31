@@ -47,6 +47,7 @@ export const MainLink = styled.div`
   button{
     border: none;
     background: transparent;
+    cursor: pointer;
   }
   img {
     width: 120px;

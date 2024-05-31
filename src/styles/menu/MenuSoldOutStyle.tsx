@@ -25,6 +25,7 @@ export const CateSelect = styled.div`
   select {
     width: 160px;
     border: none;
+    cursor: pointer;
   }
 `;
 export const SoldOutMenuWrap = styled.div`
@@ -55,14 +56,19 @@ export const SoldOutMenuItem = styled.div`
     font-weight: 600;
   }
   button {
-    width: 65px;
-    height: 40px;
+    width: 110px;
+    height: 50px;
     border-radius: 10px;
     border: 1px solid #555;
     background: #FFF;
+    cursor: pointer;
 
     color: #000;
     font-size: 20px;
     font-weight: 600;
+  }
+  .soldout{
+    border: 1px solid red;
+    color: red
   }
 `;
