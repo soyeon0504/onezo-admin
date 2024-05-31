@@ -26,7 +26,7 @@ const SchedulePage = () => {
     setTimeSettingModal(true);
   };
   const handleClosedDay = () => {
-    setClosedDaySettingModal(false);
+    setClosedDaySettingModal(true);
   };
   const closeModal = () => {
     setTimePauseModal(false);

@@ -14,7 +14,9 @@ import {
   TimeWrap,
   Wrap,
 } from "../../styles/order/WaitComponentStyle";
-import OrderAbout from '../../components/order/OrderAbout'
+import { useState } from "react";
+import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle";
+import OrderCancelModal from "./OrderCancelModal";
 
 const orderData = [
   {
@@ -80,10 +82,25 @@ const orderData = [
 ]
 
 const CompletedComponent = () => {
+  const [orderCancelModal, setOrderCancelModal] = useState(false);
+
+  const handleOrderCancel = () => {
+    setOrderCancelModal(true);
+  };
+
+  const closeModal = () => {
+    setOrderCancelModal(false);
+  };
+
   return (
     <>
+    {orderCancelModal && (
+      <>
+      <OrderCancelModal onClose={closeModal}/>
+      <ModalBackground />
+      </>
+    )}
       <Wrap>
-        {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
             {orderData && orderData.map((item, index) => (
@@ -104,7 +121,7 @@ const CompletedComponent = () => {
                   </MenuWrap>
                 </PriceMenuWrap>
                 <ButtonWrap>
-                  <CancleButton>취소</CancleButton>
+                  <CancleButton onClick={() => handleOrderCancel()}>취소</CancleButton>
                 </ButtonWrap>
               </OrderBoxInner>
             </OrderBox>
