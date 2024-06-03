@@ -14,9 +14,9 @@ const beforeReq = config => {
     return Promise.reject({ response: { data: { error: "Login하세요." } } });
   }
   // console.log("3. 쿠키에서 토큰 정보를 뜯는다.");
-  const { accessToken } = memberInfo;
-  // console.log("4. 엑세스토큰 정보", accessToken);
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  const { token } = memberInfo;
+  // console.log("4. 엑세스토큰 정보", token);
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 };
 
@@ -25,9 +25,9 @@ const requestFail = error => {
   return Promise.reject(error);
 };
 
-// const refreshJWT = async (accessToken, refreshToken) => {
+// const refreshJWT = async (token, refreshToken) => {
 //   const host = SERVER_URL;
-//   const header = { headers: { Authorization: `Bearer ${accessToken}` } };
+//   const header = { headers: { Authorization: `Bearer ${token}` } };
 //   const res = await axios.get(
 //     `${host}/api/user/refresh-token?refreshToken=${refreshToken}`,
 //     header,
@@ -46,21 +46,21 @@ const beforeRes = async res => {
     // console.log("3. 새로운 토큰을 요청해야 합니다.");
     // console.log("4. 쿠키에 있는 정보를 읽어서 다시 시도합니다.");
     const memberInfo = getCookie("member");
-    // console.log("5. 쿠키 토큰 정보 AccessToken", memberInfo.accessToken);
+    // console.log("5. 쿠키 토큰 정보 token", memberInfo.token);
     // console.log("6. 쿠키 토큰 정보 RefreshToken", memberInfo.refreshToken);
     // console.log("7. 위의 정보로 새로운 토큰을 요청합니다.");
     const result = await refreshJWT(
-      memberInfo.accessToken,
+      memberInfo.token,
       // memberInfo.refreshToken,
     );
     // console.log("8. 요청 이후 되돌아와서 새로운 정보로 쿠키를 업데이트");
-    (memberInfo.accessToken = result.accessToken),
+    (memberInfo.token = result.token),
       // (memberInfo.refreshToken = result.refreshToken),
       setCookie("member", JSON.stringify(memberInfo));
 
     // console.log("9. 데이터 요청하던 API 재요청");
     const originalRequest = res.config;
-    originalRequest.headers.Authorization = `Bearer ${result.accessToken}`;
+    originalRequest.headers.Authorization = `Bearer ${result.token}`;
     return await axios(originalRequest);
   }
   return res;

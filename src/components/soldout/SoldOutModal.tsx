@@ -16,7 +16,7 @@ const SoldOutModal = ({ soldOutStatus, onCloseModal }) => {
         )}
       </SoldOutTxtZone>
       <SoldOutBtZone>
-        <button onClick={onCloseModal}>취소</button>
+        <button className="cancel_bt" onClick={onCloseModal}>취소</button>
         <button>확인</button>
       </SoldOutBtZone>
     </SoldOutModalStyle>
