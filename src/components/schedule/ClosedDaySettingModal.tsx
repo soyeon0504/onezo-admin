@@ -2,12 +2,17 @@ import React from "react";
 import {
   BtWrap,
   CancelBt,
+  ClosedDayInnerWrap,
   DayWrap,
+  HolidayWrap,
   InnerWrap,
   RegularWrap,
   SaveBt,
   SelectWrap,
   TemporaryWrap,
+  TimeSetting,
+  TimeSettingFrom,
+  TimeSettingTo,
   Wrap,
 } from "../../styles/schedule/ScheduleModalStyle.tsx";
 
@@ -62,11 +67,22 @@ const timeList = [
   "23:30",
 ];
 
+const dayList = [
+  "날짜 선택",
+  "월요일",
+  "화요일",
+  "수요일",
+  "목요일",
+  "금요일",
+  "토요일",
+  "일요일",
+];
+
 const ClosedDaySettingModal = ({ onClose }) => {
   return (
     <>
       <Wrap>
-        <InnerWrap>
+        <ClosedDayInnerWrap>
           <SelectWrap>
             <select>
               <option>대구 동성로점</option>
@@ -75,45 +91,74 @@ const ClosedDaySettingModal = ({ onClose }) => {
               <option>대구 동성로점</option>
             </select>
           </SelectWrap>
-          <RegularWrap>
-            <div className="regular-holiday">정기휴무</div>
-            <DayWrap>
-            <label>
-              <input type="checkbox" />
-              월요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              화요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              수요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              목요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              금요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              토요일
-            </label>
-            <label>
-              <input type="checkbox" />
-              일요일
-            </label>
-            </DayWrap>
-          </RegularWrap>
-          <TemporaryWrap></TemporaryWrap>
+          <HolidayWrap>
+            <RegularWrap>
+              <div className="regular-holiday">정기휴무</div>
+              <DayWrap>
+                <label>
+                  <input type="checkbox" />
+                  월요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  화요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  수요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  목요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  금요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  토요일
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  일요일
+                </label>
+              </DayWrap>
+            </RegularWrap>
+            <TemporaryWrap>
+              <div className="temporary-holiday">임시휴무</div>
+              <TimeSetting>
+                <select>
+                  {dayList.map((item, index) => {
+                    return <option key={`day-list-${index}`}>{item}</option>;
+                  })}
+                </select>
+                <div className="from-wrap">
+                  <select>
+                    {timeList.map((item, index) => {
+                      return <option key={`time-list-${index}`}>{item}</option>;
+                    })}
+                  </select>
+                  <div className="from">부터</div>
+                </div>
+              </TimeSetting>
+              <TimeSetting>
+                <div className="to-wrap">
+                  <select>
+                    {timeList.map((item, index) => {
+                      return <option key={`time-list-${index}`}>{item}</option>;
+                    })}
+                  </select>
+                  <div className="to">까지</div>
+                </div>
+              </TimeSetting>
+            </TemporaryWrap>
+          </HolidayWrap>
           <BtWrap>
             <CancelBt onClick={onClose}>취소</CancelBt>
             <SaveBt onClick={onClose}>저장</SaveBt>
           </BtWrap>
-        </InnerWrap>
+        </ClosedDayInnerWrap>
       </Wrap>
     </>
   );

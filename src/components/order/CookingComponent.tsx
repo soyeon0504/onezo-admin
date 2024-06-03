@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AcceptBt,
   ButtonWrap,
@@ -14,7 +14,7 @@ import {
   TimeWrap,
   Wrap,
 } from "../../styles/order/WaitComponentStyle";
-import OrderAbout from '../../components/order/OrderAbout'
+import OrderAbout from "../../components/order/OrderAbout";
 
 const orderData = [
   {
@@ -25,7 +25,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -35,7 +35,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -45,7 +45,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -55,7 +55,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -65,7 +65,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -75,41 +75,65 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
-]
+];
+
+interface IOrderItem {
+  orderItemId: number;
+  orderId: number;
+  menuId: number;
+  quantity: number;
+}
+
+interface IProps {
+  orderId: number;
+  storeId: number;
+  memberId: number;
+  status: string;
+  orderDate: string;
+  takeInOut: string;
+  orderItems: IOrderItem[];
+}
 
 const CookingComponent = () => {
+  const [orderState, setOrderState] = useState<IProps[]>([]);
+
   return (
     <>
       <Wrap>
         {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
-            {orderData && orderData.map((item, index) => (
-              <OrderBox key={index}>
-              <OrderBoxInner>
-                <TimeWrap>
-                  <div className="order-time">{item.time}</div>
-                </TimeWrap>
-                <PriceMenuWrap>
-                  <PriceWrap>
-                    <div className="order-count">[메뉴 {item.totalCount}개]</div>
-                    <div className="order-price">{item.price}원</div>
-                    <div className="order-type">({item.type})</div>
-                  </PriceWrap>
-                  <MenuWrap>
-                    <div className="order-menu-1">{item.menu} {item.menuCount}개</div>
-                    <div className="order-menu-2">{item.side} {item.sideCount}개</div>
-                  </MenuWrap>
-                </PriceMenuWrap>
-                <ButtonWrap>
-                  <CompleteButton>완료 처리하기</CompleteButton>
-                </ButtonWrap>
-              </OrderBoxInner>
-            </OrderBox>
-            ))}
-            
+            {orderState &&
+              orderState.map((item, index) => (
+                <OrderBox key={index}>
+                  <OrderBoxInner>
+                    <TimeWrap>
+                      <div className="order-time">{item.orderDate}</div>
+                    </TimeWrap>
+                    <PriceMenuWrap>
+                      <PriceWrap>
+                        <div className="order-count">
+                          [메뉴 {item.orderItems.length}개]
+                        </div>
+                        {/* <div className="order-price">{item.price}원</div> */}
+                        <div className="order-type">({item.takeInOut})</div>
+                      </PriceWrap>
+                      <MenuWrap>
+                        {item.orderItems.map((orderItems, index) => (
+                          <div key={index} className="order-menu-1">
+                            메뉴 ID: {orderItems.menuId} {orderItems.quantity}개
+                          </div>
+                        ))}
+                      </MenuWrap>
+                    </PriceMenuWrap>
+                    <ButtonWrap>
+                      <CompleteButton>완료 처리하기</CompleteButton>
+                    </ButtonWrap>
+                  </OrderBoxInner>
+                </OrderBox>
+              ))}
           </OrderBoxWrap>
         </InnerWrap>
       </Wrap>

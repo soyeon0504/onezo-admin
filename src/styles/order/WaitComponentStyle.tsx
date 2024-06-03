@@ -84,10 +84,10 @@ export const AcceptBt = styled.div`
   background-color: #ff8b38;
   width: 220px;
   height: 60px;
-  font-size: 25px;
   cursor: pointer;
   text-align: center;
   button {
+    font-size: 25px;
     color: #fff;
     border: none;
     background-color: transparent;

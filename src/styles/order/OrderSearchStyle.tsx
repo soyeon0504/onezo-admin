@@ -34,12 +34,49 @@ export const DateInput = styled.div`
     border-radius: 5px;
     padding-left: 15px;
     font-size: 16px;
+    pointer-events: none;
+    cursor: not-allowed;
   }
   img {
     position: absolute;
     padding-top: 7px;
     right: 110px;
     cursor: pointer;
+  }
+  .react-calendar {
+    border-radius: 10px;
+    border: 1px solid var(--festie-gray-400, #c8c8c8); // 전체 틀: border, border-radius 조정
+  }
+
+  .react-calendar__navigation__label > span {
+    // 달력 상단 년/월 글씨 커스텀
+    color: var(--festie-gray-800, #3a3a3a);
+    /* font-family: SUIT Variable; */
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 140%;
+  }
+  .react-calendar__month-view__weekdays abbr {
+    text-decoration: none;
+    font-weight: 800;
+  }
+
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    //hover 했을 때 색상 변경
+    border-radius: 5px;
+    background: var(--festie-primary-orange, #FF8B38);
+    color: #fff;
+  }
+  .react-calendar__tile--now {
+    // 오늘 날짜 하이라이트 커스텀
+    background: white;
+    color: var(--festie-gray-800, #3a3a3a);
+  }
+  .react-calendar__tile--active {
+    border-radius: 5px;
+    background: var(--festie-primary-orange, #FF8B38);
+    color: white;
   }
 `;
 
@@ -79,7 +116,7 @@ export const TimeWrap = styled.div`
     margin-left: 10px;
   }
   .order-time {
-    padding-left: 20px;
+    padding-left: 10px;
   }
 `;
 

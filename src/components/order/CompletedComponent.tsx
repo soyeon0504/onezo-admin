@@ -27,7 +27,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -37,7 +37,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -47,7 +47,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -57,7 +57,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -67,7 +67,7 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
   {
     time: "13:33",
@@ -77,11 +77,30 @@ const orderData = [
     menu: "원조바삭후라이드",
     menuCount: "1",
     side: "사이드",
-    sideCount: "2"
+    sideCount: "2",
   },
-]
+];
+
+interface IOrderItem {
+  orderItemId: number;
+  orderId: number;
+  menuId: number;
+  quantity: number;
+}
+
+interface IProps {
+  orderId: number;
+  storeId: number;
+  memberId: number;
+  status: string;
+  orderDate: string;
+  takeInOut: string;
+  orderItems: IOrderItem[];
+}
 
 const CompletedComponent = () => {
+  const [orderState, setOrderState] = useState<IProps[]>([]);
+
   const [orderCancelModal, setOrderCancelModal] = useState(false);
 
   const handleOrderCancel = () => {
@@ -94,39 +113,46 @@ const CompletedComponent = () => {
 
   return (
     <>
-    {orderCancelModal && (
-      <>
-      <OrderCancelModal onClose={closeModal}/>
-      <ModalBackground />
-      </>
-    )}
+      {orderCancelModal && (
+        <>
+          <OrderCancelModal onClose={closeModal} />
+          <ModalBackground />
+        </>
+      )}
       <Wrap>
         <InnerWrap>
           <OrderBoxWrap>
-            {orderData && orderData.map((item, index) => (
-              <OrderBox key={index}>
-              <OrderBoxInner>
-                <TimeWrap>
-                  <div className="order-time">{item.time}</div>
-                </TimeWrap>
-                <PriceMenuWrap>
-                  <PriceWrap>
-                    <div className="order-count">[메뉴 {item.totalCount}개]</div>
-                    <div className="order-price">{item.price}원</div>
-                    <div className="order-type">({item.type})</div>
-                  </PriceWrap>
-                  <MenuWrap>
-                    <div className="order-menu-1">{item.menu} {item.menuCount}개</div>
-                    <div className="order-menu-2">{item.side} {item.sideCount}개</div>
-                  </MenuWrap>
-                </PriceMenuWrap>
-                <ButtonWrap>
-                  <CancleButton onClick={() => handleOrderCancel()}>취소</CancleButton>
-                </ButtonWrap>
-              </OrderBoxInner>
-            </OrderBox>
-            ))}
-            
+            {orderState &&
+              orderState.map((item, index) => (
+                <OrderBox key={index}>
+                  <OrderBoxInner>
+                    <TimeWrap>
+                      <div className="order-time">{item.orderDate}</div>
+                    </TimeWrap>
+                    <PriceMenuWrap>
+                      <PriceWrap>
+                        <div className="order-count">
+                          [메뉴 {item.orderItems.length}개]
+                        </div>
+                        {/* <div className="order-price">{item.price}원</div> */}
+                        <div className="order-type">({item.takeInOut})</div>
+                      </PriceWrap>
+                      <MenuWrap>
+                        {item.orderItems.map((orderItems, index) => (
+                          <div key={index} className="order-menu-1">
+                            메뉴 ID: {orderItems.menuId} {orderItems.quantity}개
+                          </div>
+                        ))}
+                      </MenuWrap>
+                    </PriceMenuWrap>
+                    <ButtonWrap>
+                      <CancleButton onClick={() => handleOrderCancel()}>
+                        취소
+                      </CancleButton>
+                    </ButtonWrap>
+                  </OrderBoxInner>
+                </OrderBox>
+              ))}
           </OrderBoxWrap>
         </InnerWrap>
       </Wrap>

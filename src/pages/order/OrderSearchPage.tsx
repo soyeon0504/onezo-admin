@@ -91,45 +91,83 @@ const orderData = [
   },
 ];
 
-const orderList = [
+const orderListData = [
   {
-    "orderId": 1,
-    "storeId": 1,
-    "memberId": 1,
-    "status": "BEFORE_COOKING",
-    "orderDate": "2024-05-31T14:24:14.000+00:00",
-    "takeInOut": "TAKEOUT",
-    "orderItems": [
+    orderId: 1,
+    storeId: 1,
+    memberId: 1,
+    status: "BEFORE_COOKING",
+    orderDate: "2024-05-31T14:24:14.000+00:00",
+    takeInOut: "TAKEOUT",
+    orderItems: [
       {
-        "orderItemId": 1,
-        "orderId": 1,
-        "menuId": 85,
-        "quantity": 3
-      }
-    ]
-  }
-]
+        orderItemId: 1,
+        orderId: 1,
+        menuId: 85,
+        quantity: 3,
+      },
+    ],
+  },
+];
+
+interface IOrderItem {
+  orderItemId: number;
+  orderId: number;
+  menuId: number;
+  quantity: number;
+}
+
+interface IProps {
+  orderId: number;
+  storeId: number;
+  memberId: number;
+  status: string;
+  orderDate: string;
+  takeInOut: string;
+  orderItems: IOrderItem[];
+}
 
 const OrderSearchPage = ({ onChange, value }) => {
   // 전달 받을 주문 리스트
-  const [orderList, setOrderList] = useState([]);
+  const [orderList, setOrderList] = useState<IProps[]>([]);
 
   const [orderCancelModal, setOrderCancelModal] = useState(false);
 
   const [nowDate, setNowDate] = useState("날짜");
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchOrderList = async () => {
+      try {
+        const res = await getOrderAllList();
+        console.log("Fetched order list:", res);
+        setOrderList(res);
+      } catch (error) {
+        console.log(
+          `Error fetching order list: ${
+            error.response?.data?.message || error.message
+          }`,
+        );
+        alert(
+          `Error fetching order list: ${
+            error.response?.data?.message || error.message
+          }`,
+        );
+      }
+    };
+    fetchOrderList();
+  }, []);
+
   const handleClickCalendar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleDateChange = selectedDate => {
+  const handleDateChange = (selectedDate) => {
     onChange(selectedDate);
     setIsOpen(false);
     setNowDate(moment(selectedDate).format("YYYY년 MM월 DD일"));
   };
 
-  
   const handleOrderCancel = () => {
     setOrderCancelModal(true);
   };
@@ -138,23 +176,14 @@ const OrderSearchPage = ({ onChange, value }) => {
     setOrderCancelModal(false);
   };
 
-  // useEffect(() => {
-  //   try {
-  //     const res = getOrderAllList;
-  //     setOrderList(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },[])
-
   return (
     <>
-    {orderCancelModal && (
-      <>
-      <OrderCancelModal onClose={closeModal}/>
-      <ModalBackground />
-      </>
-    )}
+      {orderCancelModal && (
+        <>
+          <OrderCancelModal onClose={closeModal} />
+          <ModalBackground />
+        </>
+      )}
       <Wrap>
         <InnerWrap>
           <Top>
@@ -166,7 +195,7 @@ const OrderSearchPage = ({ onChange, value }) => {
                 src="../../images/admin/calendar.svg"
                 onClick={handleClickCalendar}
               />
-              {nowDate}
+              {/* {nowDate} */}
               {isOpen && (
                 <>
                   <Calendar
@@ -174,6 +203,7 @@ const OrderSearchPage = ({ onChange, value }) => {
                     onChange={handleDateChange}
                     value={value}
                     formatDay={(locale, date) => moment(date).format("DD")}
+                    calendarType="gregory"
                     // formatDay={(locale, date) =>
                     // date.toLocaleString('en', { day: 'numeric' })
                     // }
@@ -185,29 +215,30 @@ const OrderSearchPage = ({ onChange, value }) => {
           </Top>
           <MainWrap>
             <OrderBoxWrap>
-              {orderData &&
-                orderData.map((item, index) => (
+              {orderList &&
+                orderList.map((item, index) => (
                   <OrderBox key={index}>
                     <OrderBoxInner>
                       <TimeWrap>
-                        <div className="order-date">{item.date}</div>
-                        <div className="order-time">{item.time}</div>
+                        <div className="order-time">
+                          {moment(item.orderDate).format("YYYY.MM.DD HH:mm")}
+                        </div>
                       </TimeWrap>
                       <PriceMenuWrap>
                         <PriceWrap>
                           <div className="order-count">
-                            [메뉴 {item.totalCount}개]
+                            [메뉴 {item.orderItems.length}개]
                           </div>
-                          <div className="order-price">{item.price}원</div>
-                          <div className="order-type">({item.type})</div>
+                          {/* <div className="order-price">{item.price}원</div> */}
+                          <div className="order-type">({item.takeInOut})</div>
                         </PriceWrap>
                         <MenuWrap>
-                          <div className="order-menu-1">
-                            {item.menu} {item.menuCount}개
-                          </div>
-                          <div className="order-menu-2">
-                            {item.side} {item.sideCount}개
-                          </div>
+                          {item.orderItems.map((orderItems, index) => (
+                            <div key={index} className="order-menu-1">
+                              메뉴 ID: {orderItems.menuId} {orderItems.quantity}
+                              개
+                            </div>
+                          ))}
                         </MenuWrap>
                       </PriceMenuWrap>
                     </OrderBoxInner>
