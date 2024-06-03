@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Wrap = styled.div`
-position: fixed;
-margin-left: 200px;
+  position: fixed;
+  margin-left: 200px;
   width: 533px;
   height: 646px;
   border: 1px solid #572a01;
@@ -11,7 +11,7 @@ margin-left: 200px;
   z-index: 999999;
 `;
 export const InnerWrap = styled.div`
-margin: 0 auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 345px;
@@ -87,7 +87,7 @@ export const SaveBt = styled(CancelBt)`
 
 // TimeSettingModal
 export const SelectWrap = styled.div`
-margin: 0 auto;
+  margin: 0 auto;
   select {
     border: 1px solid #000;
     width: 400px;
@@ -129,7 +129,28 @@ export const TimeSettingTo = styled.div`
 `;
 
 // ClosedDaySetting
+export const ClosedDayInnerWrap = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 390px;
+  height: 420px;
+  margin: 0 auto;
+  justify-content: space-between;
+  margin-top: 100px;
+`
+
+export const HolidayWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-bottom: 60px;
+`;
+
 export const RegularWrap = styled.div`
+/* padding-left: 20px; */
   height: 200px;
   width: 75px;
   font-size: 15px;
@@ -138,14 +159,40 @@ export const RegularWrap = styled.div`
     display: flex;
     gap: 4px;
   }
-  `;
-export const DayWrap = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: column;
-gap: 15px;
-input[type=checkbox] {
-  accent-color: #ff8b38;
-}
 `;
-export const TemporaryWrap = styled.div``;
+export const DayWrap = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  input[type="checkbox"] {
+    accent-color: #ff8b38;
+  }
+`;
+
+export const TemporaryWrap = styled.div`
+/* padding-left: 50px; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  font-size: 15px;
+  font-weight: 700;
+`;
+
+export const TimeSetting = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .from-wrap, .to-wrap {
+    display: flex;
+  }
+  select {
+    width: 109px;
+    height: 32px;
+    border: 1.5px solid #000;
+  }
+  .from, .to {
+    padding: 7px 7px;
+  }
+`;

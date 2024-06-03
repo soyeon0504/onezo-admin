@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { jwtAxios } from "../../util/jwtUtil";
 import { SERVER_URL } from "../config";
 
 const failPostDatas = () => {
@@ -30,16 +32,35 @@ export const idOverlapPost = async (userId) => {
   }
 };
 
-// OrderSearchPage
+export const putOrderAccept = async (orderId) => {
+  try {
+    const url = `${SERVER_URL}/orders/accept/${orderId}`
+    const res = await jwtAxios.put(url, orderId);
+    return res;
+  } catch (error) {
+    // idPostFail();
+  }
+};
 
+export const putOrderReject = async (orderId) => {
+  try {
+    const url = `${SERVER_URL}/orders/reject/${orderId}`
+    const res = await jwtAxios.put(url, orderId);
+    return res;
+  } catch (error) {
+    // idPostFail();
+  }
+};
+
+// OrderSearchPage
 export const getOrderAllList = async () => {
   try {
     const url = `${SERVER_URL}/orders/store`;
-    const res = await axios.get(url);
+    const res = await jwtAxios.get(url);
     return res.data;
   } catch (error) {
     console.log(error);
-    failPostDatas("/");
+    // failPostDatas("/");
   }
 };
 
