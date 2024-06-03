@@ -47,22 +47,13 @@ export const ReviewCancelBt = styled.div`
     cursor: pointer;
   }
 `;
-export const ReviewOrder = styled.div`
+export const ReviewBtZone = styled.div`
   display: flex;
-  gap: 15px;
-  img {
-    width: 70px;
-    height: 70px;
-  }
-  h1 {
+  gap: 30px;
+  justify-content: center;
+  .modifyBt{
+    background: #fff;
     color: #000;
-    font-size: 18px;
-    font-weight: 700;
-    margin: 5px 0px 10px 0px;
-  }
-  h2 {
-    color: #000;
-    font-size: 18px;
-    font-weight: 500;
+    border: 1px solid #000;
   }
 `;

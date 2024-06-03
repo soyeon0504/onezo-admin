@@ -10,6 +10,7 @@ export const SoldOutModalStyle = styled.div`
   height: 220px;
   padding: 10px 20px 20px;
   background-color: #fff;
+  border-radius: 10px;
   button {
     width: 120px;
     height: 50px;
@@ -34,9 +35,14 @@ export const SoldOutCancelBt = styled.div`
 export const SoldOutTxtZone = styled.div`
   text-align: center;
   margin: 30px 0px;
-`
+`;
 export const SoldOutBtZone = styled.div`
-display: flex;
-justify-content: center;
-gap: 30px;
-`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  .cancel_bt {
+    background: #fff;
+    border: 1px solid #ff8b38;
+    color: #ff8b38;
+  }
+`;

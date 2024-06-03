@@ -15,7 +15,7 @@ export const loginPostAsync = createAsyncThunk(
 );
 
 const initState = {
-  accessToken: "",
+  storeId: null,
 };
 
 const loadMemberCookie = () => {
@@ -26,18 +26,18 @@ const loadMemberCookie = () => {
 const loginSlice = createSlice({
   name: "loginSlice",
   initialState: loadMemberCookie() || initState,
-  
+
   reducers: {
     login: (state, action) => {
       console.log("login");
       //console.log(action.payload);
-      return { accessToken: action.payload.accessToken };
+      return { storeId: action.payload.storeId };
     },
     logout: (state, action) => {
       console.log("logout");
       removeCookie("member", "/");
-      sessionStorage.removeItem('isLogin');
-      sessionStorage.removeItem('userAuth');
+      sessionStorage.removeItem("isLogin");
+      sessionStorage.removeItem("userAuth");
       return { ...initState };
     },
   },
@@ -49,9 +49,9 @@ const loginSlice = createSlice({
         console.log("payload", payload);
         if (!payload.error) {
           setCookie("member", JSON.stringify(payload));
-          sessionStorage.setItem('isLogin', 'true');
-          sessionStorage.setItem('userAuth', action.payload.auth);
-          return {...state, isLogin: true, iuser: payload.iuser }
+          sessionStorage.setItem("isLogin", "true");
+          sessionStorage.setItem("userAuth", action.payload.auth);
+          return { ...state, isLogin: true, iuser: payload.iuser };
         } else {
           console.log(payload.error);
         }

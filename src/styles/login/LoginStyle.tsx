@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const LoginPageStyle = styled.div`
   width: 1300px;
-  margin: 0 auto;
+  margin: 50px auto;
 `;
 
 export const LoginBox = styled.div`
@@ -78,7 +78,8 @@ export const LoginFooter = styled.div`
     list-style: none;
   }
   hr {
-    width: 15px;
-    transform: rotate(90deg);
+    margin: 0 10px;
+    /* width: 15px; */
+    /* transform: rotate(90deg); */
   }
 `;

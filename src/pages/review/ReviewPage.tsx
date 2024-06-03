@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ReviewItem,
   ReviewStyle,
@@ -7,6 +7,9 @@ import {
 import { PaginationOrange } from "../../styles/Pagination.tsx";
 import ReviewModal from "../../components/review/ReviewModal.tsx";
 import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle.tsx";
+import { getReview, putReview } from "../../api/review/review_api.js";
+import { useSelector } from "react-redux";
+import ReviewConfirmModal from "../../components/review/ReviewConfirmModal.tsx";
 
 // 더미데이터
 const reviewData = [
@@ -98,18 +101,50 @@ const reviewData = [
 ];
 
 const ReviewPage = () => {
+  const [data, setData] = useState(null);
   const [search, setSearch] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
 
   const [page, setPage] = useState<number>(1);
 
+  // store_id 값
+  // const store_id = useSelector(state => state.loginSlice.storeId);
+  const store_id = 14;
+
+  // 데이터 연동(리뷰조회)
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getReview(store_id);
+        setData(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  // 데이터 연동(댓글 작성 & 수정)
+  const [reviewId, setReviewId] = useState<number>(0);
+  const [reply, setReply] = useState<string>("");
+
   // 리뷰작성 모달창
   const [reviewModal, setReviewModal] = useState<boolean>(false);
-  const handleReviewRegister = () => {
+  const [reviewComfirmModal, setReviewComfirmModal] = useState<boolean>(false);
+  const handleReviewRegister = reviewId => {
+    setReviewId(reviewId);
     setReviewModal(true);
   };
   const closeReviewRegister = () => {
     setReviewModal(false);
+  };
+  const handleReviewComfirm = (reviewId, reply) => {
+    setReviewId(reviewId);
+    setReply(reply);
+    setReviewComfirmModal(true);
+  };
+  const closeReviewComfirm = () => {
+    setReviewComfirmModal(false);
   };
   // 페이지네이션
   const COMMENTS_PER_PAGE = 10;
@@ -121,16 +156,19 @@ const ReviewPage = () => {
     <>
       {reviewModal && (
         <>
-          <ReviewModal
-            store="경대북문점"
-            onCloseModal={closeReviewRegister}
-          />
-          <ModalBackground/>
+          <ReviewModal reviewId={reviewId} onCloseModal={closeReviewRegister} />
+          <ModalBackground />
+        </>
+      )}
+      {reviewComfirmModal && (
+        <>
+          <ReviewConfirmModal reviewId={reviewId} reply={reply} onCloseModal={closeReviewComfirm} />
+          <ModalBackground />
         </>
       )}
       <ReviewStyle>
         <h1>&nbsp;&nbsp;리뷰 관리</h1>
-        <SearchForm>
+        {/* <SearchForm>
           <input
             type="text"
             placeholder="검색어를 입력하세요"
@@ -144,18 +182,24 @@ const ReviewPage = () => {
             }}
           ></input>
           <button type="button" onClick={() => setSearch(inputValue)}></button>
-        </SearchForm>
-        {reviewData
-          .slice((page - 1) * COMMENTS_PER_PAGE, page * COMMENTS_PER_PAGE)
-          .map(item => (
-            <ReviewItem key={item.id}>
+        </SearchForm> */}
+        {data
+          ?.slice((page - 1) * COMMENTS_PER_PAGE, page * COMMENTS_PER_PAGE)
+          .map((item, index) => (
+            <ReviewItem key={index}>
               <div>
-                <p>{item.id}.</p>
-                <p>{item.title}</p>
-                <p>{item.rating}점</p>
+                <p>{index + 1}.</p>
+                <p>{item.review}</p>
+                <p>{item.star}점</p>
               </div>
               <span>{item.nick}</span>
-              <button onClick={handleReviewRegister}>댓글쓰기</button>
+              {!item.reply ? (
+                <button onClick={() => handleReviewRegister(item.review_id)}>
+                  댓글쓰기
+                </button>
+              ):<button onClick={() => handleReviewComfirm(item.review_id, item.reply)}>
+              댓글보기
+            </button>}
             </ReviewItem>
           ))}
         <div style={{ textAlign: "center", margin: "20px 0" }}>

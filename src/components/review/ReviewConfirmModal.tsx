@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
+    ReviewBtZone,
   ReviewCancelBt,
   ReviewModalStyle,
 } from "../../styles/review/ReviewModalstyle";
 import { putReview } from "../../api/review/review_api";
 
-const ReviewModal = ({ reviewId, onCloseModal }) => {
+const ReviewConfirmModal = ({ reviewId, reply, onCloseModal }) => {
   // 데이터 연동(댓글 작성 & 수정)
   const [replyComment, setReplyComment] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>(reply);
 
   useEffect(() => {
     const putData = async () => {
@@ -27,16 +28,18 @@ const ReviewModal = ({ reviewId, onCloseModal }) => {
       <p>리뷰</p>
       <textarea
         placeholder="댓글을 남겨주세요."
+        value={inputValue}
         onChange={e => {
           const inputText = e.target.value;
           setInputValue(inputText);
         }}
       />
-      <div style={{ textAlign: "center" }}>
-        <button onClick={() => setReplyComment(inputValue)}>작성완료</button>
-      </div>
+      <ReviewBtZone>
+        <button  className="modifyBt" onClick={() => setReplyComment(inputValue)}>수정</button>
+        <button>삭제</button>
+      </ReviewBtZone>
     </ReviewModalStyle>
   );
 };
 
-export default ReviewModal;
+export default ReviewConfirmModal;

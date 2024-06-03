@@ -117,8 +117,6 @@ const MenuSoldOutPage = () => {
   const [menu_name, setMenu_name] = useState<string>("");
   const [menu_image, setMenu_image] = useState<string>("");
   const [sold_out_yn, setSold_out_yn] = useState<string>("");
-  // store_id 값
-  const store_id = 1; // 로그인 연동 후 수정하기
 
   // 데이터 연동(메뉴 조회)
   const [menu_category, setMenu_category] = useState<string>("ALL");
@@ -135,14 +133,6 @@ const MenuSoldOutPage = () => {
   }, [menu_category]);
   console.log("data:", data);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setMenu_id(data.menu_id);
-  //     setMenu_name(data.menu_name);
-  //     setMenu_image(data.menu_image);
-  //     setSold_out_yn(data.sold_out_yn);
-  //   }
-  // }, [data]);
   // 카테고리 선택
   console.log("카테 : ", menu_category);
 
