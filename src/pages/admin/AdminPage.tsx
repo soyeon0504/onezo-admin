@@ -10,6 +10,7 @@ const AdminPage = () => {
   const location = useLocation();
   const [activeBtn, setActiveBtn] = useState<string>("");
   const [selectedItem, setSelectedItem] = useState<string>("");
+  
   const adminCate = [
     {
       title: "가맹점페이지",

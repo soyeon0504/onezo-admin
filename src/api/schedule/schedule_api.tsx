@@ -1,18 +1,13 @@
 import axios from "axios";
 import { SERVER_URL } from "../config";
 
-const failPostDatas = () => {
-    const navigate = useNavigate();
-    navigate("/");
-  };
 
-export const getOrderAllList = async () => {
+export const postRegularHoliday = async () => {
     try {
-      const url = `${SERVER_URL}/orders/store`;
-      const res = await axios.get(url);
+      const url = `${SERVER_URL}/schedule/regularHoliday`;
+      const res = await axios.post(url);
       return res.data;
     } catch (error) {
       console.log(error);
-      failPostDatas("/");
     }
   };

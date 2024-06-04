@@ -1,19 +1,17 @@
 import React from "react";
+import { postRegularHoliday } from "../../api/schedule/schedule_api.tsx";
 import {
   BtWrap,
   CancelBt,
   ClosedDayInnerWrap,
   DayWrap,
   HolidayWrap,
-  InnerWrap,
   RegularWrap,
   SaveBt,
   SelectWrap,
   TemporaryWrap,
   TimeSetting,
-  TimeSettingFrom,
-  TimeSettingTo,
-  Wrap,
+  Wrap
 } from "../../styles/schedule/ScheduleModalStyle.tsx";
 
 const timeList = [
@@ -79,6 +77,26 @@ const dayList = [
 ];
 
 const ClosedDaySettingModal = ({ onClose }) => {
+  const saveSuccess = async e => {
+    e.preventDefault();
+    console.log("saveSuccess 함수가 호출되었습니다.");
+    try {
+      const res = await postRegularHoliday();
+      console.log(res);
+      const resStatus = res.status.toString();
+      if (resStatus.charAt(0) === "4") {
+        alert("오류가 발생했습니다. 다시 시도해주세요");
+      } else if (res.status === 201) {
+        alert("저장에 성공하였습니다.");
+      } else {
+        alert("알 수 없는 응답 상태입니다.");
+      }
+    } catch (error) {
+      console.error("Error during save:", error);
+      alert("네트워크 오류가 발생했습니다. 다시 시도해주세요");
+    }
+  };
+
   return (
     <>
       <Wrap>
@@ -156,7 +174,9 @@ const ClosedDaySettingModal = ({ onClose }) => {
           </HolidayWrap>
           <BtWrap>
             <CancelBt onClick={onClose}>취소</CancelBt>
-            <SaveBt onClick={onClose}>저장</SaveBt>
+            <SaveBt type="submit" onClick={saveSuccess}>
+              저장
+            </SaveBt>
           </BtWrap>
         </ClosedDayInnerWrap>
       </Wrap>

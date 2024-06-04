@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AcceptBt,
   ButtonWrap,
@@ -100,27 +100,32 @@ interface IProps {
   orderItems: IOrderItem[];
 }
 
-const WaitComponent = () => {
+interface BeforeCookingComponentProps {
+  orderState: IProps[];
+}
+
+const WaitComponent: React.FC<BeforeCookingComponentProps> = ({orderState}) => {
+  
   // 전달 받은 데이터
-  const [orderState, setOrderState] = useState<IProps[]>([]);
+  // const [orderState, setOrderState] = useState<IProps[]>([]);
 
-  const handleClickAccept = async (orderId: number) => {
-    try {
-      const res = await putOrderAccept(orderId);
-      setOrderState(res?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleClickAccept = async (orderId: number) => {
+  //   try {
+  //     const res = await putOrderAccept(orderId);
+  //     setOrderState(res?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const handleClickReject = async (orderId: number) => {
-    try {
-      const res = await putOrderReject(orderId);
-      setOrderState(res?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleClickReject = async (orderId: number) => {
+  //   try {
+  //     const res = await putOrderReject(orderId);
+  //     setOrderState(res?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <>
       <Wrap>
@@ -150,12 +155,12 @@ const WaitComponent = () => {
                       </MenuWrap>
                     </PriceMenuWrap>
                     <ButtonWrap>
-                      <AcceptBt onClick={() => handleClickAccept(item.orderId)}>
+                      {/* <AcceptBt onClick={() => handleClickAccept(item.orderId)}>
                         <button>접수하기</button>
                       </AcceptBt>
                       <RejectBt onClick={() => handleClickReject(item.orderId)}>
                         <button>주문거부</button>
-                      </RejectBt>
+                      </RejectBt> */}
                     </ButtonWrap>
                   </OrderBoxInner>
                 </OrderBox>

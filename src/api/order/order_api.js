@@ -8,10 +8,10 @@ const failPostDatas = () => {
   navigate("/");
 };
 
-export const getOrderState = async () => {
+export const getOrderState = async (status) => {
   try {
-    const url = `${SERVER_URL}/orders/status`;
-    const res = await axios.get(url);
+    const url = `${SERVER_URL}/orders/store/${status}`;
+    const res = await jwtAxios.get(url);
     return res.data;
   } catch (error) {
     console.log(error);
