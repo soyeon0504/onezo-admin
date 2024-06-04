@@ -11,23 +11,45 @@ import CookingComponent from "../../components/order/CookingComponent";
 import CompletedComponent from "../../components/order/CompletedComponent";
 import { getOrderState } from "../../api/order/order_api";
 
+interface IOrderItem {
+  orderItemId: number;
+  orderId: number;
+  menuId: number;
+  quantity: number;
+}
+
+interface IProps {
+  orderId: number;
+  storeId: number;
+  memberId: number;
+  status: string;
+  orderDate: string;
+  takeInOut: string;
+  orderItems: IOrderItem[];
+}
+
 const OrderAbout = () => {
-  const [activeComponent, setActiveComponent] = useState("wait");
-  const [focus, setFocus] = useState("wait");
+  const [activeComponent, setActiveComponent] = useState("BEFORE_COOKING");
+  const [focus, setFocus] = useState("BEFORE_COOKING");
   // 전달 받은 데이터
-  const [orderState, setOrderState] = useState();
-  
-  const handleButtonClick = async(component:string, item:string) => {
+  const [orderState, setOrderState] = useState<IProps[]>([]);
+
+  useEffect(() => {
+    handleButtonClick(focus);
+  }, [focus]);
+
+  const handleButtonClick = async(status, item = "") => {
+  // const handleButtonClick = async(component:string, item:string) => {
     if(item === "") {
       try {
-        const res = await getOrderState();
+        const res = await getOrderState(status);
         setOrderState(res);
       } catch (error) {
         console.log(error)
       }
     }
-    setActiveComponent(component);
-    console.log("Button clicked:", component);
+    setActiveComponent(status);
+    console.log("Button clicked:", status);
   };
 
 
@@ -38,36 +60,36 @@ const OrderAbout = () => {
           <OrderTop>
             <OrderTopInner>
               <OrderTopButton
-              $focus={focus === "wait"}
-                key={`wait`}
+              $focus={focus === "BEFORE_COOKING"}
+                key={`BEFORE_COOKING`}
                 onClick={() => {
-                  setFocus("wait");
-                  handleButtonClick("wait");
+                  setFocus("BEFORE_COOKING");
+                  handleButtonClick("BEFORE_COOKING");
                 }}
                 style={{
                   borderRight: "none",
                 }}
               >
-                <span>주문 대기 {}건</span>
+                <span>주문 대기 {orderState.length}건</span>
               </OrderTopButton>
               <OrderTopButton
-                key={`cooking`}
-                $focus={focus === "cooking"}
+                key={`COOKING`}
+                $focus={focus === "COOKING"}
                 onClick={() => {
-                  setFocus("cooking");
-                  handleButtonClick("cooking");
+                  setFocus("COOKING");
+                  handleButtonClick("COOKING");
                 }}
                 style={{
                 }}
               >
-                <span>조리 중 {}건</span>
+                <span>조리 중 {orderState.length}건</span>
               </OrderTopButton>
               <OrderTopButton
-                key={`completed`}
-                $focus={focus === "completed"}
+                key={`COMPLETED`}
+                $focus={focus === "COMPLETED"}
                 onClick={() => {
-                  setFocus("completed");
-                  handleButtonClick("completed");
+                  setFocus("COMPLETED");
+                  handleButtonClick("COMPLETED");
                 }}
 
                 style={{
@@ -78,9 +100,9 @@ const OrderAbout = () => {
               </OrderTopButton>
             </OrderTopInner>
           </OrderTop>
-          {activeComponent === "wait" && <WaitComponent />}
-          {activeComponent === "cooking" && <CookingComponent />}
-          {activeComponent === "completed" && <CompletedComponent />}
+          {activeComponent === "BEFORE_COOKING" && <WaitComponent orderState={orderState} />}
+          {activeComponent === "COOKING" && <CookingComponent orderState={orderState} />}
+          {activeComponent === "COMPLETED" && <CompletedComponent orderState={orderState} />}
         </InnerWrap>
       </Wrap>
     </div>
