@@ -7,7 +7,7 @@ export const SoldOutModalStyle = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1000;
   width: 450px;
-  height: 220px;
+  height: 300px;
   padding: 10px 20px 20px;
   background-color: #fff;
   border-radius: 10px;
