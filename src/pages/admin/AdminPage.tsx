@@ -20,7 +20,7 @@ const AdminPage = () => {
         "soldout",
         "review",
         "sales",
-        "notice_list",
+        "notice",
       ],
       list: [
         "주문 관리",
@@ -37,7 +37,7 @@ const AdminPage = () => {
   // AdminCate 상태 변경
   useEffect(() => {
     const storedItem = sessionStorage.getItem("selectedItem");
-    const pathName = location.pathname.split("/").pop();
+    const pathName = location.pathname.split("/")[2];
     const categoryMatch = adminCate[0].name.find(name => name === pathName);
 
     if (categoryMatch) {
@@ -68,7 +68,7 @@ const AdminPage = () => {
           (name === "soldout" && subItem === "메뉴 품절") ||
           (name === "review" && subItem === "리뷰 관리") ||
           (name === "sales" && subItem === "매출 관리") ||
-          (name === "notice_list" && subItem === "공지 관리")
+          (name === "notice" && subItem === "공지 관리")
         );
       });
 

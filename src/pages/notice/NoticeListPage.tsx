@@ -83,7 +83,7 @@ const NoticeListPage = () => {
   // 페이지 이동
   const navigate = useNavigate();
   const moveToNoticeRegister = () => {
-    navigate("/admin/notice_register");
+    navigate("/admin/notice/register");
   };
 
   // 페이지네이션
