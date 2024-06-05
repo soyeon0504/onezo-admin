@@ -12,7 +12,7 @@ export const Salesstyle = styled.div`
   }
   p {
     position: absolute;
-    top: 140px;
+    top: 100px;
     font-size: 12px;
   }
 `;

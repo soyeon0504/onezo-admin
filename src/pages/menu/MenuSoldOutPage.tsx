@@ -7,7 +7,7 @@ import {
 } from "../../styles/menu/MenuSoldOutStyle";
 import SoldOutModal from "../../components/soldout/SoldOutModal";
 import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle.tsx";
-import { getMenu } from "../../api/menu/menu_api.js";
+import { getMenu, soldOutMenu } from "../../api/menu/menu_api.js";
 
 // 카테고리
 const menuCate = [
@@ -120,38 +120,51 @@ const MenuSoldOutPage = () => {
 
   // 데이터 연동(메뉴 조회)
   const [menu_category, setMenu_category] = useState<string>("ALL");
+  const SoldOutListData = async () => {
+    const res = await getMenu(menu_category);
+    setData(res);
+  };
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getMenu(menu_category);
-        setData(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
+    SoldOutListData();
   }, [menu_category]);
-  console.log("data:", data);
-
-  // 카테고리 선택
-  console.log("카테 : ", menu_category);
 
   // 품절버튼 클릭
   const [soldOutModal, setSoldOutModal] = useState<boolean>(false);
-  const handleSoldOutModal = () => {
+  const [soldOutStatus, setSoldOutStatus] = useState<string>("");
+  const handleSoldOutModal = (id, status) => {
+    setMenu_id(id);
+    setSoldOutStatus(status);
     setSoldOutModal(true);
   };
   const closeSoldOutModal = () => {
     setSoldOutModal(false);
   };
+  // 데이터 연동(메뉴 품절상태 변경)
+  const handleChangeStatus = () => {
+    soldOutStatus == "Y" ? setSold_out_yn("N") : setSold_out_yn("Y");
+    setSoldOutModal(false);
+  };
+
+  useEffect(() => {
+    const stateData = async () => {
+      await soldOutMenu({ menu_id, sold_out_yn });
+      await SoldOutListData();
+      setMenu_id(0);
+      setSold_out_yn("");
+    };
+    if (menu_id !== 0 && sold_out_yn !== "") {
+      stateData();
+    }
+  }, [menu_id, sold_out_yn]);
 
   return (
     <>
       {soldOutModal && (
         <>
           <SoldOutModal
-            soldOutStatus={menuData[0].soldOutStatus}
+            soldOutStatus={soldOutStatus}
             onCloseModal={closeSoldOutModal}
+            onChangeStatus={handleChangeStatus}
           />
           <ModalBackground />
         </>
@@ -176,9 +189,20 @@ const MenuSoldOutPage = () => {
                 <img src={item.menu_image} />
                 <p>{item.menu_name}</p>
                 {item.sold_out_yn === "N" ? (
-                  <button onClick={handleSoldOutModal}>판매 중</button>
+                  <button
+                    onClick={() =>
+                      handleSoldOutModal(item.menu_id, item.sold_out_yn)
+                    }
+                  >
+                    판매 중
+                  </button>
                 ) : (
-                  <button onClick={handleSoldOutModal} className="soldout">
+                  <button
+                    onClick={() =>
+                      handleSoldOutModal(item.menu_id, item.sold_out_yn)
+                    }
+                    className="soldout"
+                  >
                     품절
                   </button>
                 )}

@@ -40,10 +40,12 @@ export const InfoMain = styled.div`
 `;
 
 export const MainLink = styled.div`
-  width: 845px;
+  /* width: 845px; */
+  margin-top: 50px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 120px;
+  gap: 200px;
   button{
     border: none;
     background: transparent;

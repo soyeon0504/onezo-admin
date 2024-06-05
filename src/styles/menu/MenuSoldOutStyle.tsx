@@ -33,7 +33,7 @@ export const SoldOutMenuWrap = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   column-gap: 20px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   /* background: beige; */
 `;
 export const SoldOutMenuItem = styled.div`

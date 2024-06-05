@@ -85,7 +85,7 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "notice_list",
+      path: "notice",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyNoticeListPage />
@@ -93,7 +93,7 @@ const adminRouter = () => {
       ),
     },
     {
-      path: "notice_register",
+      path: "notice/register",
       element: (
         <Suspense fallback={<Loading />}>
           <LazyNoticePage />

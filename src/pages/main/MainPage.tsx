@@ -14,7 +14,7 @@ const MainPage = () => {
   return (
     <Layout>
       <MainPageStyle>
-        <MainInfo>
+        {/* <MainInfo>
           <InfoHeader>
             <img src="/images/main/user.png" />
             <p>경대북문점</p>
@@ -23,7 +23,7 @@ const MainPage = () => {
             <p>주소 : 대구 북구 대학로 80</p>
             <p>연락처 : 053)123-4567</p>
           </InfoMain>
-        </MainInfo>
+        </MainInfo> */}
         <MainLink>
           <button onClick={() => navigate("/admin/order_management")}>
             <img src="/images/main/order_management.png" />
@@ -49,7 +49,7 @@ const MainPage = () => {
             <img src="/images/main/sales.png" />
             <p>매출 관리</p>
           </button>
-          <button onClick={() => navigate("/admin/notice_list")}>
+          <button onClick={() => navigate("/admin/notice")}>
             <img src="/images/main/notice.png" />
             <p>공지 관리</p>
           </button>
