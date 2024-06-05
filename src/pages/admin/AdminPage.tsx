@@ -73,6 +73,7 @@ const AdminPage = () => {
       });
 
       if (selectedName) {
+        window.scrollTo(0, 0);
         navigate(`/admin/${selectedName}`, {
           state: { selectedItem: subItem },
         });

@@ -193,10 +193,10 @@ const ReviewPage = () => {
             <ReviewItem key={index}>
               <div>
                 <p>{index + 1}.</p>
-                <p>{item.review}</p>
+                <p>{item.comment}</p>
                 <p>{item.star}점</p>
               </div>
-              <span>{item.nick}</span>
+              <span>{item.nickname}</span>
               {!item.reply ? (
                 <button onClick={() => handleReviewRegister(item.review_id)}>
                   댓글쓰기

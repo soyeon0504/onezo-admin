@@ -65,7 +65,8 @@ export const ReviewItem = styled.div`
   span {
     width: 140px;
     color: #777;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 600;
   }
   button {
     width: 90px;
