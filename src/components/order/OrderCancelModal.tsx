@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { putOrderCancle } from "../../api/order/order_api";
 
 
 export const Wrap = styled.div`
@@ -59,7 +60,19 @@ export const SaveBt = styled(CancelBt)`
   cursor: pointer;
 `;
 
-const OrderCancelModal = ({ onClose }) => {
+
+const OrderCancelModal = ({ onClose, orderId }) => {
+  const [cookingOrderState, setCookingOrderState] = useState(null);
+
+  const handleClickCancle = async () => {
+    try {
+      const res = await putOrderCancle(orderId);
+      setCookingOrderState(res?.data);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -68,7 +81,7 @@ const OrderCancelModal = ({ onClose }) => {
           <NoticeText>조리 완료된 주문입니다.<br/> 환불 처리하시겠습니까?</NoticeText>
           <BtWrap>
             <CancelBt onClick={onClose}>취소</CancelBt>
-            <SaveBt onClick={onClose}>환불</SaveBt>
+            <SaveBt onClick={() => handleClickCancle}>환불</SaveBt>
           </BtWrap>
         </InnerWrap>
       </Wrap>

@@ -15,6 +15,8 @@ import {
   Wrap,
 } from "../../styles/order/WaitComponentStyle";
 import OrderAbout from "../../components/order/OrderAbout";
+import moment from "moment";
+import { putOrderComplete } from "../../api/order/order_api";
 
 const orderData = [
   {
@@ -94,15 +96,31 @@ interface IProps {
   orderDate: string;
   takeInOut: string;
   orderItems: IOrderItem[];
+  totalPrice: number
 }
 
-const CookingComponent = () => {
-  const [orderState, setOrderState] = useState<IProps[]>([]);
+interface CookingComponentProps {
+  orderState: IProps[];
+}
+
+const CookingComponent: React.FC<CookingComponentProps> = ({orderState}) => {
+    // 전달 받은 데이터
+    const [cookingOrderState, setCookingOrderState] = useState<IProps[]>([]);
+
+    const handleClickComplete = async (orderId: number) => {
+      try {
+        const res = await putOrderComplete(orderId);
+        setCookingOrderState(res?.data);
+        alert('주문을 완료하였습니다.')
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
 
   return (
     <>
       <Wrap>
-        {/* <OrderAbout /> */}
         <InnerWrap>
           <OrderBoxWrap>
             {orderState &&
@@ -110,26 +128,28 @@ const CookingComponent = () => {
                 <OrderBox key={index}>
                   <OrderBoxInner>
                     <TimeWrap>
-                      <div className="order-time">{item.orderDate}</div>
+                      <div className="order-time">
+                      {moment(item.orderDate).format("HH:mm")}
+                        </div>
                     </TimeWrap>
                     <PriceMenuWrap>
                       <PriceWrap>
                         <div className="order-count">
                           [메뉴 {item.orderItems.length}개]
                         </div>
-                        {/* <div className="order-price">{item.price}원</div> */}
+                        <div className="order-price">{item.totalPrice.toLocaleString()}원</div>
                         <div className="order-type">({item.takeInOut})</div>
                       </PriceWrap>
                       <MenuWrap>
                         {item.orderItems.map((orderItems, index) => (
-                          <div key={index} className="order-menu-1">
+                          <div key={index} className="order-menu">
                             메뉴 ID: {orderItems.menuId} {orderItems.quantity}개
                           </div>
                         ))}
                       </MenuWrap>
                     </PriceMenuWrap>
                     <ButtonWrap>
-                      <CompleteButton>완료 처리하기</CompleteButton>
+                      <CompleteButton onClick={() => handleClickComplete(item.orderId)}>완료 처리하기</CompleteButton>
                     </ButtonWrap>
                   </OrderBoxInner>
                 </OrderBox>

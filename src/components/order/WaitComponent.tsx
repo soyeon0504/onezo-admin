@@ -19,6 +19,7 @@ import {
   putOrderAccept,
   putOrderReject,
 } from "../../api/order/order_api";
+import moment from "moment";
 
 const orderData = [
   {
@@ -98,6 +99,8 @@ interface IProps {
   orderDate: string;
   takeInOut: string;
   orderItems: IOrderItem[];
+  totalPrice: number
+
 }
 
 interface BeforeCookingComponentProps {
@@ -107,25 +110,27 @@ interface BeforeCookingComponentProps {
 const WaitComponent: React.FC<BeforeCookingComponentProps> = ({orderState}) => {
   
   // 전달 받은 데이터
-  // const [orderState, setOrderState] = useState<IProps[]>([]);
+  const [waitOrderState, setWaitOrderState] = useState<IProps[]>([]);
 
-  // const handleClickAccept = async (orderId: number) => {
-  //   try {
-  //     const res = await putOrderAccept(orderId);
-  //     setOrderState(res?.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleClickAccept = async (orderId: number) => {
+    try {
+      const res = await putOrderAccept(orderId);
+      setWaitOrderState(res?.data);
+      alert('주문을 수락하였습니다.')
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const handleClickReject = async (orderId: number) => {
-  //   try {
-  //     const res = await putOrderReject(orderId);
-  //     setOrderState(res?.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleClickReject = async (orderId: number) => {
+    try {
+      const res = await putOrderReject(orderId);
+      setWaitOrderState(res?.data);
+      alert('주문을 거부하였습니다.')
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Wrap>
@@ -136,31 +141,33 @@ const WaitComponent: React.FC<BeforeCookingComponentProps> = ({orderState}) => {
                 <OrderBox key={index}>
                   <OrderBoxInner>
                     <TimeWrap>
-                      <div className="order-time">{item.orderDate}</div>
+                      <div className="order-time">
+                      {moment(item.orderDate).format("HH:mm")}
+                      </div>
                     </TimeWrap>
                     <PriceMenuWrap>
                       <PriceWrap>
                         <div className="order-count">
                           [메뉴 {item.orderItems.length}개]
                         </div>
-                        {/* <div className="order-price">{item.price}원</div> */}
+                        <div className="order-price">{item.totalPrice.toLocaleString()}원</div>
                         <div className="order-type">({item.takeInOut})</div>
                       </PriceWrap>
                       <MenuWrap>
                         {item.orderItems.map((orderItems, index) => (
-                          <div key={index} className="order-menu-1">
+                          <div key={index} className="order-menu">
                             메뉴 ID: {orderItems.menuId} {orderItems.quantity}개
                           </div>
                         ))}
                       </MenuWrap>
                     </PriceMenuWrap>
                     <ButtonWrap>
-                      {/* <AcceptBt onClick={() => handleClickAccept(item.orderId)}>
+                      <AcceptBt onClick={() => handleClickAccept(item.orderId)}>
                         <button>접수하기</button>
                       </AcceptBt>
                       <RejectBt onClick={() => handleClickReject(item.orderId)}>
                         <button>주문거부</button>
-                      </RejectBt> */}
+                      </RejectBt>
                     </ButtonWrap>
                   </OrderBoxInner>
                 </OrderBox>

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrap = styled.div`
-  width: 1080;
+  width: 1080px;
   margin: 0 auto;
 `;
 
@@ -37,7 +37,7 @@ export const TimeWrap = styled.div`
     font-size: 34px;
     font-weight: 700;
   }
-`;
+  `;
 
 export const PriceMenuWrap = styled.div`
   display: flex;
@@ -49,12 +49,12 @@ export const PriceMenuWrap = styled.div`
 
 export const PriceWrap = styled.div`
   display: flex;
-  width: 300px;
+  gap: 10px;
   justify-content: space-between;
   .order-count,
   .order-price {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 700;
   }
   .order-type {
     font-size: 25px;
@@ -66,7 +66,7 @@ display: flex;
 flex-direction: column;
 height: 80px;
 justify-content: space-between;
-  .order-menu-1, .order-menu-2 {
+  .order-menu {
     font-size: 24px;
   }
 `;
@@ -74,7 +74,7 @@ justify-content: space-between;
 export const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 175px;
+  padding-left: 150px;
   height: 140px;
   justify-content: space-between;
 `;
@@ -121,7 +121,6 @@ background-color: #FF8B38;
 font-size: 25px;
 font-weight: 700;
 margin-top: 30px;
-margin-left: 10px;
 cursor: pointer;
 `
 export const CancleButton = styled.button`
