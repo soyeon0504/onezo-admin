@@ -125,6 +125,7 @@ interface IProps {
   orderDate: string;
   takeInOut: string;
   orderItems: IOrderItem[];
+  totalPrice: number
 }
 
 const OrderSearchPage = ({ onChange, value }) => {
@@ -229,7 +230,7 @@ const OrderSearchPage = ({ onChange, value }) => {
                           <div className="order-count">
                             [메뉴 {item.orderItems.length}개]
                           </div>
-                          {/* <div className="order-price">{item.price}원</div> */}
+                          <div className="order-price">{item.totalPrice.toLocaleString()}원</div>
                           <div className="order-type">({item.takeInOut})</div>
                         </PriceWrap>
                         <MenuWrap>

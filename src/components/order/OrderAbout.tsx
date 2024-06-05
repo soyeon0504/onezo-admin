@@ -26,6 +26,7 @@ interface IProps {
   orderDate: string;
   takeInOut: string;
   orderItems: IOrderItem[];
+  totalPrice: number
 }
 
 const OrderAbout = () => {

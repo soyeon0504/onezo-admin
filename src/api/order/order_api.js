@@ -22,15 +22,6 @@ export const getOrderState = async (status) => {
 
 
 // WaitComponent 주문 접수, 거부
-export const idOverlapPost = async (userId) => {
-  try {
-    const url = `${SERVER_URL}/auth/checkId`
-    const res = await axios.post(url, userId);
-    return res;
-  } catch (error) {
-    // idPostFail();
-  }
-};
 
 export const putOrderAccept = async (orderId) => {
   try {
@@ -38,7 +29,7 @@ export const putOrderAccept = async (orderId) => {
     const res = await jwtAxios.put(url, orderId);
     return res;
   } catch (error) {
-    // idPostFail();
+    console.log(error);
   }
 };
 
@@ -49,6 +40,28 @@ export const putOrderReject = async (orderId) => {
     return res;
   } catch (error) {
     // idPostFail();
+  }
+};
+
+// CookingComponent 주문 완료하기
+export const putOrderComplete = async (orderId) => {
+  try {
+    const url = `${SERVER_URL}/orders/complete/${orderId}`
+    const res = await jwtAxios.put(url, orderId);
+    return res;
+  } catch (error) {
+    // idPostFail();
+  }
+};
+
+// CompleteComponent 주문 취소
+export const putOrderCancle = async (orderId) => {
+  try {
+    const url = `${SERVER_URL}/orders/cancle/${orderId}`
+    const res = await jwtAxios.put(url, orderId);
+    return res;
+  } catch (error) {
+    console.log(error);
   }
 };
 

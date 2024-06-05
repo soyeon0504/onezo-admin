@@ -17,6 +17,7 @@ import {
 import { useState } from "react";
 import { ModalBackground } from "../../styles/schedule/ScheduleModalStyle";
 import OrderCancelModal from "./OrderCancelModal";
+import moment from "moment";
 
 const orderData = [
   {
@@ -96,10 +97,17 @@ interface IProps {
   orderDate: string;
   takeInOut: string;
   orderItems: IOrderItem[];
+  totalPrice: number
+
 }
 
-const CompletedComponent = () => {
-  const [orderState, setOrderState] = useState<IProps[]>([]);
+interface CompletedComponentProps {
+  orderState: IProps[];
+}
+
+
+const CompletedComponent: React.FC<CompletedComponentProps> = ({orderState}) => {
+  // const [orderState, setOrderState] = useState<IProps[]>([]);
 
   const [orderCancelModal, setOrderCancelModal] = useState(false);
 
@@ -127,19 +135,21 @@ const CompletedComponent = () => {
                 <OrderBox key={index}>
                   <OrderBoxInner>
                     <TimeWrap>
-                      <div className="order-time">{item.orderDate}</div>
+                      <div className="order-time">
+                      {moment(item.orderDate).format("HH:mm")}
+                      </div>
                     </TimeWrap>
                     <PriceMenuWrap>
                       <PriceWrap>
                         <div className="order-count">
                           [메뉴 {item.orderItems.length}개]
                         </div>
-                        {/* <div className="order-price">{item.price}원</div> */}
+                        <div className="order-price">{item.totalPrice.toLocaleString()}원</div>
                         <div className="order-type">({item.takeInOut})</div>
                       </PriceWrap>
                       <MenuWrap>
                         {item.orderItems.map((orderItems, index) => (
-                          <div key={index} className="order-menu-1">
+                          <div key={index} className="order-menu">
                             메뉴 ID: {orderItems.menuId} {orderItems.quantity}개
                           </div>
                         ))}

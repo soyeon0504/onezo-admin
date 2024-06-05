@@ -131,7 +131,8 @@ export const PriceMenuWrap = styled.div`
 
 export const PriceWrap = styled.div`
   display: flex;
-  width: 300px;
+  gap: 10px;
+  /* width: 300px; */
   justify-content: space-between;
   .order-count,
   .order-price {
