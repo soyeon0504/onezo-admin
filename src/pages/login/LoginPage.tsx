@@ -79,11 +79,11 @@ const LoginPage = () => {
             </InputBox>
             <LoginBt onClick={handleClick}>로그인</LoginBt>
           </InputWrap>
-          <LoginFooter>
+          {/* <LoginFooter>
             <li>아이디 찾기</li>
             <hr />
             <li>비밀번호 찾기</li>
-          </LoginFooter>
+          </LoginFooter> */}
         </LoginBox>
       </LoginPageStyle>
     </Layout>

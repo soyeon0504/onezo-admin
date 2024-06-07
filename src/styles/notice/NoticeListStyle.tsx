@@ -52,5 +52,6 @@ export const NoticeRegisterBt = styled.div`
     color: #fff;
     font-size: 18px;
     font-weight: 400;
+    cursor: pointer;
   }
 `;
