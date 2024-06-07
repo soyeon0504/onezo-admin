@@ -68,14 +68,12 @@ const TimeSettingModal = ({ onClose }) => {
     <>
       <Wrap>
         <InnerWrap>
-          <SelectWrap>
+          {/* <SelectWrap>
             <select>
               <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
+              <option>대구 중앙로점</option>
             </select>
-          </SelectWrap>
+          </SelectWrap> */}
           <TimeSettingWrap>
             <TimeSettingFrom>
               <div>월 ~ 일</div>

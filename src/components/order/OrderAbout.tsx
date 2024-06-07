@@ -1,3 +1,4 @@
+// 소연
 import React, { useEffect, useState } from "react";
 import {
   InnerWrap,
@@ -16,6 +17,7 @@ interface IOrderItem {
   orderId: number;
   menuId: number;
   quantity: number;
+  menuName: string
 }
 
 interface IProps {
@@ -30,8 +32,8 @@ interface IProps {
 }
 
 const OrderAbout = () => {
-  const [activeComponent, setActiveComponent] = useState("BEFORE_COOKING");
-  const [focus, setFocus] = useState("BEFORE_COOKING");
+  const [activeComponent, setActiveComponent] = useState("조리대기중");
+  const [focus, setFocus] = useState("조리대기중");
   // 전달 받은 데이터
   const [orderState, setOrderState] = useState<IProps[]>([]);
 
@@ -53,6 +55,9 @@ const OrderAbout = () => {
     console.log("Button clicked:", status);
   };
 
+  const getOrderCount = (status: string) => {
+    return orderState.filter(order => order.status === status).length;
+  };
 
   return (
     <div>
@@ -61,49 +66,55 @@ const OrderAbout = () => {
           <OrderTop>
             <OrderTopInner>
               <OrderTopButton
-              $focus={focus === "BEFORE_COOKING"}
-                key={`BEFORE_COOKING`}
+              $focus={focus === "조리대기중"}
+                key={`조리대기중`}
                 onClick={() => {
-                  setFocus("BEFORE_COOKING");
-                  handleButtonClick("BEFORE_COOKING");
+                  setFocus("조리대기중");
+                  handleButtonClick("조리대기중");
                 }}
                 style={{
                   borderRight: "none",
                 }}
               >
-                <span>주문 대기 {orderState.length}건</span>
+                <span>주문 대기 {getOrderCount("조리대기중")}건</span>
               </OrderTopButton>
               <OrderTopButton
-                key={`COOKING`}
-                $focus={focus === "COOKING"}
+                key={`조리중`}
+                $focus={focus === "조리중"}
                 onClick={() => {
-                  setFocus("COOKING");
-                  handleButtonClick("COOKING");
+                  setFocus("조리중");
+                  handleButtonClick("조리중");
                 }}
                 style={{
                 }}
               >
-                <span>조리 중 {orderState.length}건</span>
+                <span>조리 중 {getOrderCount("조리중")}건</span>
               </OrderTopButton>
               <OrderTopButton
-                key={`COMPLETED`}
-                $focus={focus === "COMPLETED"}
+                key={`조리완료`}
+                $focus={focus === "조리완료"}
                 onClick={() => {
-                  setFocus("COMPLETED");
-                  handleButtonClick("COMPLETED");
+                  setFocus("조리완료");
+                  handleButtonClick("조리완료");
                 }}
 
                 style={{
                   borderLeft: "none",
                 }}
               >
-                <span>조리 완료</span>
+                <span>조리 완료 {getOrderCount("조리완료")}건</span>
               </OrderTopButton>
             </OrderTopInner>
           </OrderTop>
-          {activeComponent === "BEFORE_COOKING" && <WaitComponent orderState={orderState} />}
-          {activeComponent === "COOKING" && <CookingComponent orderState={orderState} />}
-          {activeComponent === "COMPLETED" && <CompletedComponent orderState={orderState} />}
+          {activeComponent === "조리대기중" && getOrderCount("조리대기중") > 0 && (
+            <WaitComponent orderState={orderState.filter(order => order.status === "조리대기중")} />
+          )}
+          {activeComponent === "조리중" && getOrderCount("조리중") > 0 && (
+            <CookingComponent orderState={orderState.filter(order => order.status === "조리중")} />
+          )}
+          {activeComponent === "조리완료" && getOrderCount("조리완료") > 0 && (
+            <CompletedComponent orderState={orderState.filter(order => order.status === "조리완료")} />
+          )}
         </InnerWrap>
       </Wrap>
     </div>

@@ -61,10 +61,29 @@ export const SaveBt = styled(CancelBt)`
 `;
 
 
-const OrderCancelModal = ({ onClose, orderId }) => {
-  const [cookingOrderState, setCookingOrderState] = useState(null);
+interface IOrderItem {
+  orderItemId: number;
+  orderId: number;
+  menuId: number;
+  quantity: number;
+}
 
-  const handleClickCancle = async () => {
+interface IProps {
+  orderId: number;
+  storeId: number;
+  memberId: number;
+  status: string;
+  orderDate: string;
+  takeInOut: string;
+  orderItems: IOrderItem[];
+  totalPrice: number
+}
+
+
+const OrderCancelModal = ({ orderId, onClose }) => {
+  const [cookingOrderState, setCookingOrderState] = useState<IProps[]>([]);
+
+  const handleClickCancle = async (orderId: any) => {
     try {
       const res = await putOrderCancle(orderId);
       setCookingOrderState(res?.data);
@@ -81,7 +100,7 @@ const OrderCancelModal = ({ onClose, orderId }) => {
           <NoticeText>조리 완료된 주문입니다.<br/> 환불 처리하시겠습니까?</NoticeText>
           <BtWrap>
             <CancelBt onClick={onClose}>취소</CancelBt>
-            <SaveBt onClick={() => handleClickCancle}>환불</SaveBt>
+            <SaveBt onClick={() => handleClickCancle(orderId)}>환불</SaveBt>
           </BtWrap>
         </InnerWrap>
       </Wrap>
