@@ -18,6 +18,7 @@ export const SoldOutModalStyle = styled.div`
     background: #ff8b38;
     border: none;
     margin-top: 15px;
+    cursor: pointer;
 
     color: #fff;
     font-size: 22px;

@@ -8,7 +8,7 @@ export const LoginPageStyle = styled.div`
 export const LoginBox = styled.div`
   margin: 0 auto;
   width: 500px;
-  height: 600px;
+  height: 550px;
   border: 1px solid #bcbbbb;
   border-radius: 15px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
