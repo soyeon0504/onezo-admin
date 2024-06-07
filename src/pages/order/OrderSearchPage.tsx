@@ -115,6 +115,7 @@ interface IOrderItem {
   orderId: number;
   menuId: number;
   quantity: number;
+  menuName: string;
 }
 
 interface IProps {
@@ -128,11 +129,14 @@ interface IProps {
   totalPrice: number
 }
 
-const OrderSearchPage = ({ onChange, value }) => {
+const OrderSearchPage = ({ onChange, value, orderId }) => {
   // 전달 받을 주문 리스트
   const [orderList, setOrderList] = useState<IProps[]>([]);
 
   const [orderCancelModal, setOrderCancelModal] = useState(false);
+
+  const [selectedOrderId, setSelectedOrderId] = useState(null); // 새로운 상태 추가
+
 
   const [nowDate, setNowDate] = useState("날짜");
   const [isOpen, setIsOpen] = useState(false);
@@ -169,11 +173,13 @@ const OrderSearchPage = ({ onChange, value }) => {
     setNowDate(moment(selectedDate).format("YYYY년 MM월 DD일"));
   };
 
-  const handleOrderCancel = () => {
+  const handleOrderCancel = (orderId) => {
+    setSelectedOrderId(orderId);
     setOrderCancelModal(true);
   };
 
   const closeModal = () => {
+    setSelectedOrderId(null);
     setOrderCancelModal(false);
   };
 
@@ -181,7 +187,7 @@ const OrderSearchPage = ({ onChange, value }) => {
     <>
       {orderCancelModal && (
         <>
-          <OrderCancelModal onClose={closeModal} />
+          <OrderCancelModal onClose={closeModal} orderId={selectedOrderId} />
           <ModalBackground />
         </>
       )}
@@ -243,7 +249,7 @@ const OrderSearchPage = ({ onChange, value }) => {
                         </MenuWrap>
                       </PriceMenuWrap>
                     </OrderBoxInner>
-                    <CancleButton onClick={() => handleOrderCancel()}>
+                    <CancleButton onClick={() => handleOrderCancel(item.orderId)}>
                       취소
                     </CancleButton>
                   </OrderBox>

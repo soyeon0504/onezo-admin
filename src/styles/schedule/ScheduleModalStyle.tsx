@@ -87,7 +87,6 @@ export const SaveBt = styled(CancelBt)`
 
 // TimeSettingModal
 export const SelectWrap = styled.div`
-  margin: 0 auto;
   select {
     border: 1px solid #000;
     width: 400px;
@@ -99,6 +98,7 @@ export const SelectWrap = styled.div`
 `;
 
 export const TimeSettingWrap = styled.div`
+padding-top: 100px;
   font-size: 15px;
   font-weight: 700;
   select {
@@ -145,8 +145,9 @@ export const HolidayWrap = styled.div`
   justify-content: space-between;
   width: 450px;
   margin: 0 auto;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-bottom: 60px;
+  padding-top: 50px;
 `;
 
 export const RegularWrap = styled.div`

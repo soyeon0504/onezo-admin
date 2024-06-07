@@ -13,6 +13,7 @@ import {
   TimeSetting,
   Wrap
 } from "../../styles/schedule/ScheduleModalStyle.tsx";
+import { useState } from "react";
 
 const timeList = [
   "00:00",
@@ -76,11 +77,27 @@ const dayList = [
   "일요일",
 ];
 
+interface IDayOfWeek {
+      dayOfWeek: string
+}
+
 const ClosedDaySettingModal = ({ onClose }) => {
-  const saveSuccess = async e => {
-    e.preventDefault();
-    console.log("saveSuccess 함수가 호출되었습니다.");
-    try {
+  const [selectedDays, setSelectedDays] = useState<IDayOfWeek[]>([])
+
+  
+  const handleCheckboxChange = (day) => {
+    setSelectedDays((prev) =>
+      prev.some((d) => d.dayOfWeek === day)
+    ? prev.filter((d) => d.dayOfWeek !== day)
+    : [...prev, { dayOfWeek: day }]
+  );
+};
+
+const saveSuccess = async e => {
+  e.preventDefault();
+  console.log("saveSuccess 함수가 호출되었습니다.");
+  const regularHolidays = selectedDays.map((day) => ({ dayOfWeek: day.dayOfWeek }));
+  try {
       const res = await postRegularHoliday();
       console.log(res);
       const resStatus = res.status.toString();
@@ -101,46 +118,26 @@ const ClosedDaySettingModal = ({ onClose }) => {
     <>
       <Wrap>
         <ClosedDayInnerWrap>
-          <SelectWrap>
+          {/* <SelectWrap>
             <select>
               <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
-              <option>대구 동성로점</option>
+              <option>대구 중앙로점</option>
             </select>
-          </SelectWrap>
+          </SelectWrap> */}
           <HolidayWrap>
             <RegularWrap>
               <div className="regular-holiday">정기휴무</div>
               <DayWrap>
-                <label>
-                  <input type="checkbox" />
-                  월요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  화요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  수요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  목요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  금요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  토요일
-                </label>
-                <label>
-                  <input type="checkbox" />
-                  일요일
-                </label>
+                {dayList.slice(1).map((day, index) => (
+                  <label key={index}>
+                    <input
+                      type="checkbox"
+                      value={day}
+                      onChange={() => handleCheckboxChange(day)}
+                    />
+                    {day}
+                  </label>
+                ))}
               </DayWrap>
             </RegularWrap>
             <TemporaryWrap>

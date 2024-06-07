@@ -87,6 +87,7 @@ interface IOrderItem {
   orderId: number;
   menuId: number;
   quantity: number;
+  menuName: string;
 }
 
 interface IProps {
@@ -123,7 +124,7 @@ const CompletedComponent: React.FC<CompletedComponentProps> = ({orderState}) => 
     <>
       {orderCancelModal && (
         <>
-          <OrderCancelModal onClose={closeModal} />
+          <OrderCancelModal orderId={orderId} onClose={closeModal} />
           <ModalBackground />
         </>
       )}

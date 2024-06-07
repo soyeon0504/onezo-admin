@@ -86,6 +86,7 @@ interface IOrderItem {
   orderId: number;
   menuId: number;
   quantity: number;
+  menuName: string;
 }
 
 interface IProps {

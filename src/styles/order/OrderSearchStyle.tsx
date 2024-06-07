@@ -44,6 +44,7 @@ export const DateInput = styled.div`
     cursor: pointer;
   }
   .react-calendar {
+    position: absolute;
     border-radius: 10px;
     border: 1px solid var(--festie-gray-400, #c8c8c8); // 전체 틀: border, border-radius 조정
   }

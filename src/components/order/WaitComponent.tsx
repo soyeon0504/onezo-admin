@@ -89,6 +89,7 @@ interface IOrderItem {
   orderId: number;
   menuId: number;
   quantity: number;
+  menuName: string;
 }
 
 interface IProps {
@@ -108,7 +109,6 @@ interface BeforeCookingComponentProps {
 }
 
 const WaitComponent: React.FC<BeforeCookingComponentProps> = ({orderState}) => {
-  
   // 전달 받은 데이터
   const [waitOrderState, setWaitOrderState] = useState<IProps[]>([]);
 
